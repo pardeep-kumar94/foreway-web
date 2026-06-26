@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd /Users/pardeepkumar/work/front-end/web/Foreway/screens && mv \"Screenshot 2026-06-26 at 2.26.09 PM.png\" \"screen-dashboard.png\" && mv \"Screenshot 2026-06-26 at 2.26.16 PM.png\" \"screen-goals.png\" && mv \"Screenshot 2026-06-26 at 2.26.36 PM.png\" \"screen-goals-detail.png\" && mv \"Screenshot 2026-06-26 at 2.26.55 PM.png\" \"screen-calendar.png\" && mv \"Screenshot 2026-06-26 at 2.27.06 PM.png\" \"screen-finance.png\" && mv \"Screenshot 2026-06-26 at 2.27.29 PM.png\" \"screen-journal.png\")",
+      "Bash(cd \"/Users/pardeepkumar/work/front-end/web/Foreway/screens\" && mv \"Screenshot 2026-06-26 at 2.26.09 PM.png\" \"screen-dashboard.png\" && mv \"Screenshot 2026-06-26 at 2.26.16 PM.png\" \"screen-goals.png\" && mv \"Screenshot 2026-06-26 at 2.26.36 PM.png\" \"screen-goals-detail.png\" && mv \"Screenshot 2026-06-26 at 2.26.55 PM.png\" \"screen-calendar.png\" && mv \"Screenshot 2026-06-26 at 2.27.06 PM.png\" \"screen-finance.png\" && mv \"Screenshot 2026-06-26 at 2.27.29 PM.png\" \"screen-journal.png\")",
+      "Bash(ls -1 \"/Users/pardeepkumar/work/front-end/web/Foreway/screens/\" | xxd | head -20)",
+      "Bash(python3 -c \"\nimport os\nd = '/Users/pardeepkumar/work/front-end/web/Foreway/screens'\nmapping = {\n    'screen-dashboard.png':    '2.26.09',\n    'screen-goals.png':        '2.26.16',\n    'screen-goals-detail.png': '2.26.36',\n    'screen-calendar.png':     '2.26.55',\n    'screen-finance.png':      '2.27.06',\n    'screen-journal.png':      '2.27.29',\n}\nfor f in os.listdir\\(d\\):\n    for new_name, time in mapping.items\\(\\):\n        if time in f:\n            os.rename\\(os.path.join\\(d, f\\), os.path.join\\(d, new_name\\)\\)\n            print\\(f'{f!r} -> {new_name}'\\)\n\")"
+    ]
+  }
+}

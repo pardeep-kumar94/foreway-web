@@ -1,2159 +1,1639 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: https://ogp.me/ns#">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Foreway — Your goals, your way.</title>
+
+<!-- ── Primary SEO ──────────────────────────────────────────── -->
+<title>Mind Anchor — Best Productivity App for Mac | Goals, Habits & Finance</title>
+<meta name="description" content="Mind Anchor is the all-in-one macOS productivity app for goal tracking, habit building, personal finance, task planning, and daily journaling. One calm workspace. Zero subscriptions. Free download." />
+<meta name="keywords" content="productivity app for Mac, macOS productivity tool, goal tracking app, habit tracker Mac, personal finance app Mac, all-in-one productivity, task manager Mac, daily planner Mac, goal setting software, best productivity tools 2025, free Mac productivity app, habit building app, finance dashboard Mac, deadline tracker, journal app Mac" />
+<meta name="author" content="Mind Anchor" />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<link rel="canonical" href="https://mindanchor.app/" />
+
+<!-- ── Open Graph / Facebook ────────────────────────────────── -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://mindanchor.app/" />
+<meta property="og:title" content="Mind Anchor — Best Productivity App for Mac" />
+<meta property="og:description" content="Goals, habits, finance, tasks, and journaling — all in one calm macOS workspace. Free download. No subscription." />
+<meta property="og:image" content="https://mindanchor.app/screens/screen-dashboard.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:site_name" content="Mind Anchor" />
+<meta property="og:locale" content="en_US" />
+
+<!-- ── Twitter Card ─────────────────────────────────────────── -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Mind Anchor — Best Productivity App for Mac" />
+<meta name="twitter:description" content="Goals, habits, finance, tasks, and journaling — all in one calm macOS workspace. Free download. No subscription." />
+<meta name="twitter:image" content="https://mindanchor.app/screens/screen-dashboard.png" />
+
+<!-- ── App / Mobile hints ───────────────────────────────────── -->
+<meta name="apple-mobile-web-app-title" content="Mind Anchor" />
+<meta name="application-name" content="Mind Anchor" />
+<meta name="theme-color" content="#0D1220" />
+
+<!-- ── Performance ──────────────────────────────────────────── -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<link rel="preload" as="image" href="screens/screen-dashboard.png" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;1,14..32,400&family=Manrope:wght@700;800&display=swap" rel="stylesheet" />
 <style>
-/* ============================================================
-   FOREWAY — marketing site
-   ============================================================ */
 
+/* ─────────────────────────────────────────────────────────────
+   TOKENS
+───────────────────────────────────────────────────────────── */
 :root {
-  /* Surface */
-  --bg: #08080A;
-  --bg-2: #0C0C10;
-  --surface: rgba(255, 255, 255, 0.025);
-  --surface-2: rgba(255, 255, 255, 0.04);
-  --surface-hover: rgba(255, 255, 255, 0.06);
-  --border: rgba(255, 255, 255, 0.07);
-  --border-strong: rgba(255, 255, 255, 0.12);
+  /* Scene */
+  --bg-base:    #080E1C;
+  --bg-mid:     #0C1525;
 
-  /* Type */
-  --text: #F4F4F5;
-  --text-2: #C8C8CE;
-  --text-muted: #8A8A93;
-  --text-dim: #5C5C66;
+  /* Gold (logo signal) */
+  --gold:       #C8994A;
+  --gold-l:     #DDB96E;
+  --gold-ll:    #EDD49A;
+  --gold-dim:   rgba(200,153,74,.12);
+  --gold-glow:  rgba(200,153,74,.18);
 
-  /* Accents */
-  --coral: #FF9468;
-  --coral-soft: #FFB48A;
-  --coral-deep: #FF6B4A;
-  --sky: #7DD3FC;
-  --violet: #C4B5FD;
-  --mint: #86EFAC;
-  --amber: #FCD34D;
-  --pink: #F9A8D4;
+  /* Navy (logo mountain) */
+  --navy:       #162038;
+  --navy-l:     #1E2D4E;
 
-  /* Type stacks */
-  --font-sans: "Geist", -apple-system, BlinkMacSystemFont, ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Instrument Serif", "Iowan Old Style", Georgia, serif;
-  --font-mono: "Geist Mono", ui-monospace, "SF Mono", monospace;
+  /* Text */
+  --t1:   #F2EDE2;   /* warm white */
+  --t2:   #A8B0C8;
+  --t3:   #5C6680;
 
-  /* Motion */
-  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Glass layers — Apple material system */
+  --glass-ultra:  rgba(255,255,255,.04);
+  --glass-thin:   rgba(255,255,255,.07);
+  --glass-reg:    rgba(255,255,255,.10);
+  --glass-thick:  rgba(255,255,255,.14);
 
-  /* Layout */
-  --max: 1200px;
-  --pad: clamp(20px, 4vw, 56px);
+  /* Specular edges */
+  --spec-top:    rgba(255,255,255,.18);
+  --spec-top-sm: rgba(255,255,255,.12);
+
+  /* Fonts */
+  --display: "Manrope", -apple-system, BlinkMacSystemFont, sans-serif;
+  --body:    "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --ease:  cubic-bezier(0.22,1,.36,1);
+  --max:   1100px;
+  --gap:   clamp(20px,4.5vw,60px);
 }
 
-* { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 
 body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font-sans);
-  font-size: 16px;
-  line-height: 1.5;
-  font-feature-settings: "ss01", "cv11";
+  background: var(--bg-base);
+  color: var(--t1);
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
   overflow-x: hidden;
 }
 
 a { color: inherit; text-decoration: none; }
-img, svg { display: block; max-width: 100%; }
-em { font-family: var(--font-serif); font-style: italic; font-weight: 400; letter-spacing: -0.005em; }
+img { display: block; max-width: 100%; }
 
-/* ============================================================
-   BACKDROP
-   ============================================================ */
-.backdrop {
+/* ─────────────────────────────────────────────────────────────
+   SCENE BACKGROUND — layered depth
+───────────────────────────────────────────────────────────── */
+.scene {
   position: fixed;
   inset: 0;
-  pointer-events: none;
   z-index: 0;
+  pointer-events: none;
   overflow: hidden;
 }
-.grain {
-  position: absolute;
-  inset: -50%;
-  opacity: 0.32;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-}
-.orb {
+/* Deep ambient light from the logo's gold */
+.scene-orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(120px);
-  opacity: 0.35;
+  filter: blur(100px);
+  pointer-events: none;
 }
 .orb-1 {
-  width: 700px; height: 700px;
-  top: -260px; right: -140px;
-  background: radial-gradient(circle, rgba(255, 148, 104, 0.55), rgba(255, 107, 74, 0));
+  width: 900px; height: 600px;
+  top: -200px; left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse, rgba(200,153,74,.13) 0%, transparent 65%);
 }
 .orb-2 {
-  width: 540px; height: 540px;
-  top: 480px; left: -180px;
-  background: radial-gradient(circle, rgba(125, 211, 252, 0.32), rgba(125, 211, 252, 0));
+  width: 600px; height: 500px;
+  bottom: 0; left: -100px;
+  background: radial-gradient(ellipse, rgba(22,32,56,.8) 0%, transparent 70%);
 }
 .orb-3 {
-  width: 640px; height: 640px;
-  bottom: -200px; right: 30%;
-  background: radial-gradient(circle, rgba(196, 181, 253, 0.18), rgba(196, 181, 253, 0));
-}
-
-main { position: relative; z-index: 1; }
-
-/* ============================================================
-   NAV
-   ============================================================ */
-.nav {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 32px;
-  padding: 14px var(--pad);
-  background: rgba(8, 8, 10, 0.55);
-  backdrop-filter: saturate(140%) blur(18px);
-  -webkit-backdrop-filter: saturate(140%) blur(18px);
-  border-bottom: 1px solid var(--border);
-}
-
-.brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  font-size: 17px;
-}
-.brand-mark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px; height: 28px;
-}
-.brand-word { color: var(--text); }
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 28px;
-}
-.nav-links a {
-  color: var(--text-muted);
-  font-size: 14px;
-  font-weight: 450;
-  transition: color 0.2s var(--ease);
-}
-.nav-links a:hover { color: var(--text); }
-
-.nav-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  height: 36px;
-  padding: 0 16px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--border-strong);
-  color: var(--text);
-  font-size: 13px;
-  font-weight: 500;
-  transition: all 0.2s var(--ease);
-}
-.nav-cta:hover {
-  background: rgba(255, 148, 104, 0.12);
-  border-color: rgba(255, 148, 104, 0.45);
-}
-.nav-cta svg { opacity: 0.85; }
-
-/* ============================================================
-   HERO
-   ============================================================ */
-.hero {
-  position: relative;
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: clamp(56px, 10vw, 120px) var(--pad) 0;
-  text-align: center;
-}
-
-.hero-eyebrow,
-.kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
-  border-radius: 999px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  font-size: 12px;
-  font-family: var(--font-mono);
-  color: var(--text-muted);
-  letter-spacing: 0.02em;
-}
-.kicker .dot,
-.hero-eyebrow .dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--coral);
-  box-shadow: 0 0 12px var(--coral);
-  animation: pulse 2.4s ease-in-out infinite;
-}
-@keyframes pulse {
-  0%, 100% { opacity: 0.85; }
-  50% { opacity: 0.4; }
-}
-
-.hero-title {
-  font-size: clamp(56px, 10vw, 132px);
-  font-weight: 600;
-  line-height: 0.96;
-  letter-spacing: -0.045em;
-  margin: 28px auto 0;
-  max-width: 12ch;
-  color: var(--text);
-}
-.hero-title em {
-  font-size: 1.05em;
-  line-height: 1.05;
-  color: transparent;
-  background: linear-gradient(120deg, var(--coral-soft) 0%, var(--coral) 50%, var(--coral-deep) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  letter-spacing: -0.02em;
-  padding: 0 0.12em 0.12em 0.04em;
-  margin-left: -0.04em;
-}
-
-.hero-sub {
-  max-width: 56ch;
-  margin: 28px auto 0;
-  font-size: clamp(16px, 1.6vw, 20px);
-  line-height: 1.5;
-  color: var(--text-2);
-  text-wrap: pretty;
-}
-
-.hero-ctas {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  align-items: center;
-  margin-top: 36px;
-  flex-wrap: wrap;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  height: 52px;
-  padding: 0 22px;
-  border-radius: 14px;
-  font-weight: 500;
-  font-size: 15px;
-  letter-spacing: -0.005em;
-  border: 1px solid transparent;
-  cursor: pointer;
-  transition: all 0.25s var(--ease);
-  position: relative;
-}
-.btn-primary {
-  background: linear-gradient(180deg, #FFB48A 0%, var(--coral) 55%, var(--coral-deep) 100%);
-  color: #1a0a04;
-  box-shadow:
-    0 0 0 1px rgba(255, 148, 104, 0.4),
-    0 10px 30px -10px rgba(255, 107, 74, 0.6),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
-}
-.btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow:
-    0 0 0 1px rgba(255, 148, 104, 0.6),
-    0 18px 40px -10px rgba(255, 107, 74, 0.7),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
-}
-.btn-ghost {
-  background: var(--surface);
-  border-color: var(--border-strong);
-  color: var(--text);
-}
-.btn-ghost:hover {
-  background: var(--surface-hover);
-  border-color: rgba(255, 255, 255, 0.22);
-}
-.btn-meta {
-  font-size: 11px;
-  font-weight: 400;
-  color: rgba(26, 10, 4, 0.55);
-  margin-left: 6px;
-  padding-left: 10px;
-  border-left: 1px solid rgba(26, 10, 4, 0.18);
-}
-.btn-ghost .btn-meta {
-  color: var(--text-muted);
-  border-left-color: var(--border-strong);
-}
-.btn-xl {
-  height: 64px;
-  padding: 0 32px;
-  font-size: 17px;
-  border-radius: 18px;
-}
-.btn-xl .btn-meta { font-size: 12px; }
-
-/* Hero visual */
-.hero-visual {
-  margin: 56px auto 0;
-  position: relative;
-  max-width: 1200px;
-}
-.hero-visual svg {
-  width: 100%;
-  height: auto;
-  overflow: visible;
-}
-.hp {
-  stroke-dasharray: 1600;
-  stroke-dashoffset: 1600;
-  animation: drawLine 2.6s var(--ease-out) forwards;
-}
-.hp-1 { animation-delay: 0.2s; }
-.hp-2 { animation-delay: 0.5s; }
-.hp-3 { animation-delay: 0.8s; }
-.hp-4 { animation-delay: 1.1s; }
-@keyframes drawLine {
-  to { stroke-dashoffset: 0; }
-}
-.hero-nodes circle {
-  opacity: 0;
-  animation: fadeIn 0.4s var(--ease-out) forwards;
-}
-.hero-nodes circle:nth-child(1) { animation-delay: 1.4s; }
-.hero-nodes circle:nth-child(2) { animation-delay: 1.6s; }
-.hero-nodes circle:nth-child(3) { animation-delay: 1.8s; }
-.hero-nodes circle:nth-child(4) { animation-delay: 2.0s; }
-.hero-nodes circle:nth-child(5) { animation-delay: 2.2s; }
-.hero-nodes circle:nth-child(6) { animation-delay: 2.4s; }
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.4); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-.trust-strip {
-  margin: 56px auto 0;
-  padding: 16px var(--pad);
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px 28px;
-  font-size: 13px;
-  color: var(--text-muted);
-  font-family: var(--font-mono);
-}
-.trust-strip li {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-.ts-dot {
-  width: 4px; height: 4px; border-radius: 50%;
-  background: var(--text-muted);
-}
-
-/* ============================================================
-   STREAK BAND
-   ============================================================ */
-.streak-band {
-  max-width: var(--max);
-  margin: 80px auto 0;
-  padding: 0 var(--pad);
-}
-.streak-band-inner {
-  background: linear-gradient(180deg, var(--surface-2), var(--surface));
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  padding: 28px 32px;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 40px;
-  position: relative;
-  overflow: hidden;
-}
-.streak-band-inner::before {
-  content: "";
-  position: absolute;
-  top: -60%;
-  left: -10%;
-  width: 60%;
-  height: 220%;
-  background: radial-gradient(ellipse, rgba(255, 148, 104, 0.12), transparent 60%);
-  pointer-events: none;
-}
-
-.streak-meta {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  position: relative;
-}
-.streak-flame {
-  width: 48px; height: 48px;
-  border-radius: 14px;
-  background: rgba(255, 148, 104, 0.12);
-  border: 1px solid rgba(255, 148, 104, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.streak-label {
-  font-size: 11px;
-  font-family: var(--font-mono);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-.streak-value {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 32px;
-  line-height: 1.1;
-  color: var(--text);
-}
-.streak-value span {
-  font-family: var(--font-sans);
-  font-style: normal;
-  font-weight: 600;
-  font-size: 36px;
-  color: var(--coral-soft);
-  margin-right: 4px;
-}
-.streak-value.muted span { color: var(--text-2); }
-.streak-divider {
-  width: 1px; height: 36px;
-  background: var(--border);
-}
-
-.streak-heatmap {
-  display: grid;
-  grid-template-rows: repeat(7, 1fr);
-  grid-auto-flow: column;
-  grid-auto-columns: 1fr;
-  gap: 3px;
-  height: 88px;
-  max-width: 560px;
-  position: relative;
-}
-.streak-heatmap i {
-  border-radius: 3px;
-  background: rgba(255, 255, 255, 0.05);
-  transition: background 0.2s var(--ease);
-}
-.streak-heatmap i[data-l="1"] { background: rgba(255, 148, 104, 0.18); }
-.streak-heatmap i[data-l="2"] { background: rgba(255, 148, 104, 0.36); }
-.streak-heatmap i[data-l="3"] { background: rgba(255, 148, 104, 0.58); }
-.streak-heatmap i[data-l="4"] { background: rgba(255, 148, 104, 0.85); box-shadow: 0 0 8px rgba(255, 148, 104, 0.4); }
-.streak-heatmap i:hover { transform: scale(1.5); z-index: 2; }
-
-.streak-legend {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 11px;
-  font-family: var(--font-mono);
-  color: var(--text-muted);
-}
-.streak-legend .h {
-  width: 12px; height: 12px;
-  border-radius: 3px;
-  display: inline-block;
-}
-.h0 { background: rgba(255,255,255,0.06); }
-.h1 { background: rgba(255, 148, 104, 0.22); }
-.h2 { background: rgba(255, 148, 104, 0.42); }
-.h3 { background: rgba(255, 148, 104, 0.68); }
-.h4 { background: rgba(255, 148, 104, 0.95); }
-
-/* ============================================================
-   SECTION HEAD
-   ============================================================ */
-.section-head {
-  max-width: var(--max);
-  margin: 0 auto 56px;
-  padding: 0 var(--pad);
-}
-.section-head.center { text-align: center; }
-.section-head.center .section-sub { margin-left: auto; margin-right: auto; }
-
-.section-title {
-  font-size: clamp(40px, 6vw, 80px);
-  font-weight: 600;
-  letter-spacing: -0.035em;
-  line-height: 1.0;
-  margin: 24px 0 0;
-  color: var(--text);
-}
-.section-title em {
-  font-size: 1.06em;
-  background: linear-gradient(120deg, var(--coral-soft) 0%, var(--coral) 70%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  padding: 0 0.14em 0.08em 0.04em;
-  margin-left: -0.04em;
-  line-height: 1.05;
-}
-
-.section-sub {
-  margin: 20px 0 0;
-  max-width: 56ch;
-  color: var(--text-2);
-  font-size: clamp(15px, 1.4vw, 18px);
-  line-height: 1.55;
-  text-wrap: pretty;
-}
-
-/* ============================================================
-   FEATURES BENTO
-   ============================================================ */
-.features {
-  max-width: var(--max);
-  margin: 120px auto 0;
-  padding: 0 var(--pad);
-}
-
-.bento {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: minmax(220px, auto);
-  grid-auto-flow: dense;
-  gap: 16px;
-}
-.span-2 { grid-column: span 2; }
-.span-4 { grid-column: span 4; }
-.row-2 { grid-row: span 2; }
-
-.card {
-  position: relative;
-  background: linear-gradient(165deg, var(--surface-2) 0%, var(--surface) 100%);
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  padding: 24px;
-  overflow: hidden;
-  transition: border-color 0.3s var(--ease), transform 0.3s var(--ease);
-  display: flex;
-  flex-direction: column;
-}
-.card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  background: radial-gradient(ellipse at top, rgba(255, 255, 255, 0.04), transparent 50%);
-}
-.card:hover {
-  border-color: var(--border-strong);
-  transform: translateY(-2px);
-}
-
-.card-head { z-index: 1; position: relative; }
-.card-kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 11px;
-  font-family: var(--font-mono);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 14px;
-}
-
-.card-title {
-  font-size: 22px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
-  margin: 0;
-  color: var(--text);
-  text-wrap: balance;
-}
-.card-body {
-  margin: 10px 0 0;
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--text-muted);
-  max-width: 42ch;
-  text-wrap: pretty;
-}
-
-/* Color chip */
-.kc {
-  width: 9px; height: 9px;
-  border-radius: 3px;
-  display: inline-block;
-  flex-shrink: 0;
-}
-.kc-coral { background: var(--coral); box-shadow: 0 0 8px rgba(255,148,104,0.5); }
-.kc-sky { background: var(--sky); box-shadow: 0 0 8px rgba(125,211,252,0.5); }
-.kc-violet { background: var(--violet); box-shadow: 0 0 8px rgba(196,181,253,0.5); }
-.kc-mint { background: var(--mint); box-shadow: 0 0 8px rgba(134,239,172,0.5); }
-.kc-amber { background: var(--amber); box-shadow: 0 0 8px rgba(252,211,77,0.5); }
-
-/* --- Goals card (big concentric rings) --- */
-.card-goals .goals-rings {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 200px;
-  align-items: center;
-  gap: 24px;
-  margin-top: auto;
-  padding-top: 32px;
-}
-.rings { width: 100%; max-width: 360px; }
-.ring-legend {
-  list-style: none;
-  margin: 0; padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.ring-legend li {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  font-size: 13px;
-}
-.ring-legend .rl-name { color: var(--text-2); }
-.ring-legend .rl-val { font-family: var(--font-mono); color: var(--text-muted); font-size: 12px; }
-
-/* --- Task board card --- */
-.kanban {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-top: 20px;
-}
-.kcol {
-  background: rgba(255,255,255,0.025);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  min-height: 160px;
-}
-.kcol-label {
-  font-size: 10px;
-  font-family: var(--font-mono);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  margin-bottom: 4px;
-}
-.kt {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 10px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid var(--border);
-  border-radius: 9px;
-  font-size: 12px;
-  color: var(--text-2);
-  position: relative;
-  flex-wrap: wrap;
-}
-.kt-active {
-  background: rgba(255,148,104,0.06);
-  border-color: rgba(255,148,104,0.18);
-}
-.kt-done {
-  color: var(--text-dim);
-  text-decoration: line-through;
-  text-decoration-color: rgba(255,255,255,0.2);
-}
-.ktag {
-  width: 3px; height: 14px; border-radius: 2px; display: inline-block;
-  flex-shrink: 0;
-}
-.kt-coral { background: var(--coral); }
-.kt-sky { background: var(--sky); }
-.kt-violet { background: var(--violet); }
-.kt-mint { background: var(--mint); }
-.kt-progress {
-  width: 100%; height: 3px; border-radius: 2px;
-  background: rgba(255,255,255,0.08);
-  margin-top: 2px;
-  position: relative;
-}
-.kt-progress i {
-  position: absolute; left: 0; top: 0; bottom: 0;
-  background: linear-gradient(90deg, var(--coral), var(--coral-soft));
-  border-radius: 2px;
-}
-
-/* --- Calendar card --- */
-.mini-cal {
-  background: rgba(255,255,255,0.025);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 14px;
-  margin-top: 20px;
-}
-.mc-head {
-  display: flex;
-  justify-content: space-between;
-  font-size: 12px;
-  color: var(--text-2);
-  margin-bottom: 10px;
-  font-family: var(--font-mono);
-}
-.mc-nav { color: var(--text-dim); letter-spacing: 2px; }
-.mc-dows {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  font-size: 10px;
-  color: var(--text-dim);
-  font-family: var(--font-mono);
-  margin-bottom: 6px;
-}
-.mc-dows span { text-align: center; }
-.mc-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 4px;
-}
-.mc-day {
-  aspect-ratio: 1;
-  font-size: 11px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-  color: var(--text-2);
-  position: relative;
-  background: rgba(255,255,255,0.02);
-}
-.mc-day.mc-prev, .mc-day.mc-next { color: var(--text-dim); background: transparent; }
-.mc-day.mc-today { background: rgba(255,148,104,0.18); color: var(--coral-soft); font-weight: 600; }
-.mc-day.mc-has::after {
-  content: ""; position: absolute; bottom: 3px; left: 50%;
-  transform: translateX(-50%);
-  width: 4px; height: 4px; border-radius: 50%;
-}
-.mc-day[data-c="coral"]::after { background: var(--coral); }
-.mc-day[data-c="sky"]::after { background: var(--sky); }
-.mc-day[data-c="violet"]::after { background: var(--violet); }
-.mc-day[data-c="mint"]::after { background: var(--mint); }
-
-/* --- Check-in card --- */
-.checkin-grid {
-  display: grid;
-  grid-template-columns: 1.05fr 1fr;
-  gap: 32px;
-  align-items: center;
-  height: 100%;
-}
-.checkin-card {
-  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 22px;
-  position: relative;
-  overflow: hidden;
-}
-.checkin-card::before {
-  content: "";
-  position: absolute;
-  top: -50%; right: -30%;
-  width: 70%; height: 200%;
-  background: radial-gradient(ellipse, rgba(252,211,77,0.10), transparent 60%);
-}
-.cc-meta {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-.cc-quote {
-  margin: 14px 0 18px;
-  position: relative;
-  z-index: 1;
-}
-.quote-mark {
-  font-family: var(--font-serif);
-  font-size: 56px;
-  line-height: 0;
-  color: var(--amber);
-  vertical-align: -20px;
-  margin-right: 4px;
-}
-.cc-quote em {
-  font-size: 17px;
-  line-height: 1.35;
-  color: var(--text);
-}
-.cc-quote-by {
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-top: 6px;
-  font-family: var(--font-mono);
-}
-.cc-steps {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.cc-step {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 13px;
-  color: var(--text-2);
-  padding: 8px 0;
-  border-top: 1px solid var(--border);
-}
-.cc-step:first-child { border-top: none; padding-top: 0; }
-.cc-step.done { color: var(--text-dim); text-decoration: line-through; text-decoration-color: rgba(255,255,255,0.18); }
-.check {
-  width: 16px; height: 16px; border-radius: 50%;
-  background: var(--mint);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  position: relative;
-}
-.check::after {
-  content: "";
-  width: 4px; height: 7px;
-  border: solid #0a0a0c;
-  border-width: 0 1.6px 1.6px 0;
-  transform: rotate(45deg) translate(-1px, -1px);
-}
-.check.empty {
-  background: transparent;
-  border: 1.4px solid var(--border-strong);
-}
-.check.empty::after { display: none; }
-.cc-cta {
-  margin-top: 18px;
-  width: 100%;
-  height: 38px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid var(--border-strong);
-  border-radius: 10px;
-  color: var(--text);
-  font-family: var(--font-sans);
-  font-size: 13px;
-  cursor: pointer;
-  transition: all 0.2s var(--ease);
-}
-.cc-cta:hover {
-  background: var(--coral);
-  border-color: var(--coral);
-  color: #1a0a04;
-}
-
-/* --- Expense card --- */
-.card-expense .expense-vis {
-  position: relative;
-  margin-top: auto;
-  padding-top: 24px;
-}
-.bars {
-  display: flex;
-  align-items: flex-end;
-  gap: 6px;
-  height: 120px;
-}
-.bar {
-  flex: 1;
-  height: var(--h);
-  background: linear-gradient(180deg, rgba(134,239,172,0.4), rgba(134,239,172,0.08));
-  border-radius: 4px;
-  position: relative;
-  filter: blur(2.5px);
-  opacity: 0.6;
-}
-.bar.tall {
-  background: linear-gradient(180deg, var(--mint), rgba(134,239,172,0.2));
-  filter: blur(2.5px);
-  opacity: 0.85;
-}
-.pin-lock {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background: linear-gradient(180deg, rgba(8,8,10,0.2), rgba(8,8,10,0.5));
-  backdrop-filter: blur(2px);
-  border-radius: 10px;
-}
-.pin-dots {
-  display: flex;
-  gap: 10px;
-}
-.pin-dots i {
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.3);
-  border: 1px solid var(--border-strong);
-}
-.pin-dots i:nth-child(-n+3) { background: var(--mint); border-color: var(--mint); }
-.pin-label {
-  font-size: 11px;
-  font-family: var(--font-mono);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-
-/* --- Deadlines --- */
-.deadlines {
-  list-style: none;
-  margin: 20px 0 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-}
-.deadlines li {
-  display: grid;
-  grid-template-columns: 32px 36px 1fr auto;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 0;
-  border-top: 1px solid var(--border);
-  font-size: 13px;
-}
-.deadlines li:first-child { border-top: none; }
-.deadlines li.muted { color: var(--text-dim); }
-.d-day {
-  font-size: 10px;
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--text-dim);
-}
-.d-date {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 22px;
-  color: var(--text);
-  line-height: 1;
-}
-.deadlines .muted .d-date { color: var(--text-muted); }
-.d-text { color: var(--text-2); }
-.d-dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-}
-.d-dot.kc-coral { background: var(--coral); }
-.d-dot.kc-violet { background: var(--violet); }
-.d-dot.kc-sky { background: var(--sky); }
-.d-dot.kc-mint { background: var(--mint); }
-
-/* --- Achievements --- */
-.ach-timeline {
-  list-style: none;
-  margin: 20px 0 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  position: relative;
-}
-.ach-timeline::before {
-  content: "";
-  position: absolute;
-  top: 20px;
-  bottom: 20px;
-  left: 19px;
-  width: 1px;
-  background: linear-gradient(180deg, rgba(196,181,253,0.5), rgba(196,181,253,0.05));
-}
-.ach-timeline li {
-  display: grid;
-  grid-template-columns: 40px 1fr auto;
-  align-items: center;
-  gap: 16px;
-  padding: 12px 0;
-  position: relative;
-}
-.ach-em {
-  width: 40px; height: 40px;
-  background: var(--surface-2);
-  border: 1px solid var(--border-strong);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  position: relative;
-  z-index: 1;
-}
-.ach-title {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text);
-}
-.ach-timeline .muted .ach-title { color: var(--text-muted); }
-.ach-meta {
-  font-size: 11px;
-  font-family: var(--font-mono);
-  color: var(--text-dim);
-  margin-top: 2px;
-}
-.ach-tag {
-  font-size: 11px;
-  font-family: var(--font-mono);
-  padding: 4px 9px;
-  border-radius: 999px;
-  background: rgba(196,181,253,0.1);
-  color: var(--violet);
-  border: 1px solid rgba(196,181,253,0.2);
-}
-
-/* --- Analytics sparks --- */
-.sparks {
-  margin-top: auto;
-  padding-top: 32px;
-}
-.sparks svg {
-  width: 100%;
-  height: 90px;
-}
-.sparks-meta {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 12px;
-  font-size: 12px;
-  font-family: var(--font-mono);
-  color: var(--text-muted);
-}
-.sparks-trend { color: var(--sky); }
-
-/* --- Daily log --- */
-.card-log .log-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr);
-  gap: 32px;
-  align-items: stretch;
-  height: 100%;
-}
-.log-entries {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-}
-.log-entry {
-  background: rgba(255,255,255,0.025);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 16px 18px;
-  display: flex;
-  flex-direction: column;
-}
-.le-date {
-  font-size: 11px;
-  font-family: var(--font-mono);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-.le-text {
-  font-family: var(--font-serif);
-  font-size: 16px;
-  line-height: 1.4;
-  color: var(--text-2);
-  margin: 8px 0 14px;
-  font-style: italic;
-  flex: 1;
-}
-.le-tags {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-.le-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 9px;
-  border-radius: 999px;
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  font-size: 11px;
-  color: var(--text-muted);
-  font-family: var(--font-mono);
-}
-
-/* ============================================================
-   PHILOSOPHY
-   ============================================================ */
-.philosophy {
-  max-width: var(--max);
-  margin: 160px auto 0;
-  padding: 0 var(--pad);
-}
-.pillars {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-top: 16px;
-}
-.pillar {
-  padding: 32px 28px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  transition: all 0.3s var(--ease);
-}
-.pillar:hover {
-  background: var(--surface-2);
-  border-color: var(--border-strong);
-}
-.pillar-icon {
-  width: 56px; height: 56px;
-  border-radius: 16px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 24px;
-}
-.pillar h3 {
-  font-size: 24px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  margin: 0 0 10px;
-  color: var(--text);
-}
-.pillar p {
-  font-size: 14px;
-  line-height: 1.55;
-  color: var(--text-muted);
-  margin: 0;
-  text-wrap: pretty;
-}
-
-/* ============================================================
-   DAY RAIL
-   ============================================================ */
-.day {
-  max-width: var(--max);
-  margin: 160px auto 0;
-  padding: 0 var(--pad);
-}
-.day-rail {
-  list-style: none;
-  margin: 40px 0 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  position: relative;
-}
-.day-rail::before {
-  content: "";
-  position: absolute;
-  left: 88px;
-  top: 14px;
-  bottom: 14px;
-  width: 1px;
-  background: linear-gradient(180deg,
-    rgba(255, 148, 104, 0.4) 0%,
-    rgba(196, 181, 253, 0.3) 50%,
-    rgba(255, 148, 104, 0.4) 100%
-  );
-}
-.day-rail li {
-  display: grid;
-  grid-template-columns: 80px 12px 1fr;
-  gap: 16px;
-  align-items: center;
-  position: relative;
-}
-.day-rail li::before {
-  content: "";
-  grid-column: 2 / 3;
-  grid-row: 1;
-  width: 12px; height: 12px;
-  border-radius: 50%;
-  background: var(--bg);
-  border: 2px solid var(--coral);
-  z-index: 1;
-}
-.day-rail .dr-time { grid-column: 1; grid-row: 1; }
-.day-rail .dr-card { grid-column: 3; grid-row: 1; }
-.dr-time {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  color: var(--text-muted);
-  letter-spacing: 0.02em;
-}
-.dr-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 16px 22px;
-  transition: all 0.3s var(--ease);
-}
-.dr-card:hover {
-  background: var(--surface-2);
-  border-color: var(--border-strong);
-  transform: translateX(4px);
-}
-.dr-head {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 11px;
-  font-family: var(--font-mono);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 6px;
-}
-.dr-title {
-  font-size: 18px;
-  font-weight: 500;
-  color: var(--text);
-  letter-spacing: -0.01em;
-}
-.dr-card-finale {
-  background: linear-gradient(180deg, rgba(255,148,104,0.10), rgba(255,148,104,0.02));
-  border-color: rgba(255,148,104,0.25);
-}
-
-/* ============================================================
-   DOWNLOAD
-   ============================================================ */
-.download {
-  max-width: var(--max);
-  margin: 160px auto 80px;
-  padding: 0 var(--pad);
-}
-.dl-card {
-  position: relative;
-  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015));
-  border: 1px solid var(--border-strong);
-  border-radius: 32px;
-  padding: 72px 56px;
-  overflow: hidden;
-  text-align: center;
-}
-.dl-glow {
+  width: 500px; height: 500px;
+  top: 30%; right: -120px;
+  background: radial-gradient(ellipse, rgba(30,45,78,.5) 0%, transparent 70%);
+}
+/* Mountain silhouette implied by gradient bands */
+.scene-gradient {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 30% 0%, rgba(255,148,104,0.18), transparent 60%),
-    radial-gradient(ellipse at 70% 100%, rgba(125,211,252,0.10), transparent 60%);
-  pointer-events: none;
+    radial-gradient(ellipse 140% 60% at 50% 0%, rgba(22,32,56,.6) 0%, transparent 65%),
+    linear-gradient(180deg, transparent 50%, rgba(6,10,18,.8) 100%);
 }
-.dl-inner { position: relative; z-index: 1; }
-.dl-inner .kicker { margin-bottom: 0; }
-.dl-inner .section-title { margin: 22px auto 0; }
-.dl-inner .section-sub { margin: 18px auto 36px; }
-
-.dl-specs {
-  list-style: none;
-  margin: 56px 0 0;
-  padding: 28px 0 0;
-  border-top: 1px solid var(--border);
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 32px;
-  text-align: left;
-}
-.ds-label {
-  font-size: 11px;
-  font-family: var(--font-mono);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  margin-bottom: 6px;
-}
-.ds-val {
-  font-size: 14px;
-  color: var(--text-2);
+/* Warm noise grain */
+.scene-noise {
+  position: absolute;
+  inset: -50%;
+  opacity: .35;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .78 0 0 0 0 .64 0 0 0 0 .38 0 0 0 .5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 
-/* ============================================================
-   FOOTER
-   ============================================================ */
-.footer {
+/* ─────────────────────────────────────────────────────────────
+   GLASS MATERIAL — Apple visionOS/macOS style
+───────────────────────────────────────────────────────────── */
+.glass {
+  background: var(--glass-thin);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  border: 1px solid rgba(255,255,255,.1);
+  /* Specular top edge + soft shadow */
+  box-shadow:
+    0 1px 0 0 var(--spec-top) inset,
+    0 -1px 0 0 rgba(0,0,0,.08) inset,
+    0 1px 0 0 rgba(0,0,0,.25),
+    0 8px 32px rgba(0,0,0,.28);
+}
+.glass-ultra {
+  background: var(--glass-ultra);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid rgba(255,255,255,.07);
+  box-shadow:
+    0 1px 0 0 rgba(255,255,255,.08) inset,
+    0 4px 16px rgba(0,0,0,.2);
+}
+.glass-reg {
+  background: var(--glass-reg);
+  backdrop-filter: blur(32px) saturate(170%);
+  -webkit-backdrop-filter: blur(32px) saturate(170%);
+  border: 1px solid rgba(255,255,255,.13);
+  box-shadow:
+    0 1px 0 0 var(--spec-top) inset,
+    0 -1px 0 0 rgba(0,0,0,.1) inset,
+    0 12px 48px rgba(0,0,0,.35);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   LAYOUT
+───────────────────────────────────────────────────────────── */
+.wrap {
   max-width: var(--max);
   margin: 0 auto;
-  padding: 56px var(--pad);
-  border-top: 1px solid var(--border);
+  padding: 0 var(--gap);
+  position: relative;
+  z-index: 1;
 }
-.foot-top {
+section { position: relative; z-index: 1; }
+
+/* ─────────────────────────────────────────────────────────────
+   NAV
+───────────────────────────────────────────────────────────── */
+nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 200;
+  height: 54px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 48px;
 }
-.foot-tag {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 22px;
-  color: var(--text-2);
-  margin: 0;
+nav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(8,14,28,.01);
+  backdrop-filter: blur(32px) saturate(160%);
+  -webkit-backdrop-filter: blur(32px) saturate(160%);
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  box-shadow: 0 1px 0 rgba(255,255,255,.04) inset;
+  opacity: 0;
+  transition: opacity .35s;
 }
-.foot-cols {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+nav.scrolled::before { opacity: 1; }
+.nav-inner {
+  max-width: var(--max);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--gap);
+  display: flex;
+  align-items: center;
   gap: 32px;
-  padding-bottom: 48px;
+  position: relative;
+  z-index: 1;
 }
-.fc-label {
-  font-size: 11px;
-  font-family: var(--font-mono);
-  letter-spacing: 0.08em;
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--display);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -.25px;
+}
+.nav-logo img { width: 28px; height: 28px; border-radius: 7px; }
+.nav-links {
+  margin-left: auto;
+  display: flex;
+  gap: 28px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--t2);
+}
+.nav-links a:hover { color: var(--t1); transition: color .15s; }
+.nav-end { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+
+/* ─────────────────────────────────────────────────────────────
+   BUTTONS
+───────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 18px;
+  border-radius: 980px;   /* pill — Apple HIG */
+  font-family: var(--body);
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all .18s var(--ease);
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--gold);
+  color: #0A0F1C;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.25) inset,
+    0 4px 20px rgba(200,153,74,.35);
+}
+.btn-primary:hover {
+  background: var(--gold-l);
+  transform: translateY(-1px);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.25) inset,
+    0 6px 28px rgba(200,153,74,.45);
+}
+.btn-glass {
+  background: rgba(255,255,255,.08);
+  color: var(--t1);
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.1) inset,
+    0 2px 8px rgba(0,0,0,.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.btn-glass:hover {
+  background: rgba(255,255,255,.12);
+  border-color: rgba(255,255,255,.18);
+}
+.btn-lg  { padding: 12px 22px; font-size: 14px;   border-radius: 980px; }
+.btn-xl  { padding: 15px 30px; font-size: 15.5px; border-radius: 980px; }
+
+/* ─────────────────────────────────────────────────────────────
+   TYPE
+───────────────────────────────────────────────────────────── */
+.eyebrow {
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: .09em;
   text-transform: uppercase;
-  color: var(--text-dim);
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+h2 {
+  font-family: var(--display);
+  font-size: clamp(28px, 3.8vw, 46px);
+  font-weight: 800;
+  letter-spacing: -1.4px;
+  line-height: 1.08;
+  color: var(--t1);
   margin-bottom: 16px;
 }
-.foot-cols a {
-  display: block;
-  font-size: 14px;
-  color: var(--text-muted);
-  padding: 6px 0;
-  transition: color 0.2s var(--ease);
+.body-lg {
+  font-size: 16.5px;
+  color: var(--t2);
+  line-height: 1.65;
+  max-width: 460px;
 }
-.foot-cols a:hover { color: var(--text); }
-.foot-bottom {
+
+/* ─────────────────────────────────────────────────────────────
+   HERO
+───────────────────────────────────────────────────────────── */
+.hero {
+  padding: 130px var(--gap) 0;
+  max-width: var(--max);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px 5px 10px;
+  border-radius: 980px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--gold-ll);
+  margin-bottom: 28px;
+  background: rgba(200,153,74,.1);
+  border: 1px solid rgba(200,153,74,.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 rgba(255,255,255,.06) inset;
+}
+.chip-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 8px var(--gold);
+  flex-shrink: 0;
+}
+
+h1 {
+  font-family: var(--display);
+  font-size: clamp(46px, 7vw, 82px);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -2.5px;
+  color: var(--t1);
+  margin-bottom: 22px;
+}
+.h1-gold {
+  background: linear-gradient(135deg, var(--gold-l) 0%, var(--gold-ll) 50%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: clamp(16px, 2vw, 19px);
+  color: var(--t2);
+  max-width: 480px;
+  margin: 0 auto 36px;
+  line-height: 1.6;
+  font-weight: 400;
+}
+.hero-actions {
   display: flex;
-  justify-content: space-between;
-  padding-top: 24px;
-  border-top: 1px solid var(--border);
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.hero-hint { font-size: 12px; color: var(--t3); }
+
+/* Hero screenshot */
+.hero-shot {
+  margin-top: 60px;
+  position: relative;
+}
+.hero-shot-glow {
+  position: absolute;
+  top: -80px; left: 50%;
+  transform: translateX(-50%);
+  width: 100%; max-width: 900px;
+  height: 480px;
+  background: radial-gradient(ellipse at 50% 40%, rgba(200,153,74,.14) 0%, transparent 62%);
+  pointer-events: none;
+  filter: blur(20px);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   WINDOW CHROME
+───────────────────────────────────────────────────────────── */
+.win {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.12) inset,
+    0 0 0 .5px rgba(0,0,0,.6),
+    0 24px 80px rgba(0,0,0,.7),
+    0 4px 20px rgba(0,0,0,.45),
+    0 0 60px rgba(200,153,74,.06);
+  background: rgba(10,15,28,.7);
+  backdrop-filter: blur(2px);
+  position: relative;
+  z-index: 1;
+}
+.win-bar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 11px 16px;
+  background: rgba(255,255,255,.025);
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  box-shadow: 0 1px 0 rgba(255,255,255,.04) inset;
+}
+.tl { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
+.tl-r { background: #FF5F57; box-shadow: 0 0 6px rgba(255,95,87,.5); }
+.tl-y { background: #FFBD2E; box-shadow: 0 0 6px rgba(255,189,46,.4); }
+.tl-g { background: #28CA41; box-shadow: 0 0 6px rgba(40,202,65,.4); }
+.win-title {
+  flex: 1;
+  text-align: center;
   font-size: 12px;
-  color: var(--text-dim);
-  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--t3);
+  margin-right: 37px;
+  letter-spacing: .01em;
+}
+.win img { width: 100%; display: block; }
+
+/* ─────────────────────────────────────────────────────────────
+   STAT ROW
+───────────────────────────────────────────────────────────── */
+.stats {
+  max-width: var(--max);
+  margin: 72px auto 0;
+  padding: 0 var(--gap);
+  position: relative;
+  z-index: 1;
+}
+.stats-inner {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.1);
+  box-shadow:
+    0 1px 0 var(--spec-top) inset,
+    0 12px 48px rgba(0,0,0,.35);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+}
+.stat {
+  padding: 36px 24px;
+  text-align: center;
+  background: rgba(255,255,255,.04);
+  border-right: 1px solid rgba(255,255,255,.07);
+  transition: background .2s;
+}
+.stat:last-child { border-right: none; }
+.stat:hover { background: rgba(255,255,255,.07); }
+.stat-n {
+  font-family: var(--display);
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  color: var(--t1);
+  margin-bottom: 4px;
+  line-height: 1;
+}
+.stat-n .g {
+  background: linear-gradient(135deg, var(--gold-l), var(--gold-ll));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.stat-lbl { font-size: 12.5px; color: var(--t3); font-weight: 500; }
+
+/* ─────────────────────────────────────────────────────────────
+   FEATURES
+───────────────────────────────────────────────────────────── */
+.features {
+  padding: 100px var(--gap);
+  max-width: var(--max);
+  margin: 0 auto;
+}
+.feat-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: end;
+  margin-bottom: 48px;
+}
+.feat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.feat-card {
+  padding: 28px 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.04);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.07) inset,
+    0 4px 16px rgba(0,0,0,.18);
+  transition: all .22s var(--ease);
+  cursor: default;
+}
+.feat-card:hover {
+  background: rgba(255,255,255,.07);
+  border-color: rgba(255,255,255,.13);
+  transform: translateY(-2px);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.1) inset,
+    0 8px 32px rgba(0,0,0,.28),
+    0 0 0 1px rgba(200,153,74,.08);
+}
+.feat-num {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  color: var(--t3);
+  font-family: var(--display);
+  margin-bottom: 14px;
+}
+.feat-icon {
+  width: 32px; height: 32px;
+  border-radius: 9px;
+  background: var(--gold-dim);
+  border: 1px solid rgba(200,153,74,.16);
+  display: grid;
+  place-items: center;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 0 rgba(255,255,255,.06) inset;
+}
+.feat-icon svg { width: 16px; height: 16px; color: var(--gold); }
+.feat-title {
+  font-family: var(--display);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--t1);
+  margin-bottom: 7px;
+  letter-spacing: -.15px;
+}
+.feat-desc { font-size: 13px; color: var(--t2); line-height: 1.65; }
+
+/* ─────────────────────────────────────────────────────────────
+   PREVIEW / SCREENSHOTS
+───────────────────────────────────────────────────────────── */
+.preview {
+  padding: 0 var(--gap) 100px;
+  max-width: var(--max);
+  margin: 0 auto;
+}
+.preview-head { text-align: center; margin-bottom: 40px; }
+.preview-head .body-lg { margin: 0 auto; }
+
+.seg-ctrl {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: fit-content;
+  margin: 0 auto 28px;
+  padding: 3px;
+  border-radius: 10px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.09);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.07) inset,
+    0 2px 8px rgba(0,0,0,.2);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  flex-wrap: wrap;
+}
+.seg {
+  padding: 6px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--t3);
+  cursor: pointer;
+  transition: all .16s;
+  white-space: nowrap;
+  user-select: none;
+}
+.seg:hover { color: var(--t2); }
+.seg.active {
+  background: rgba(255,255,255,.1);
+  color: var(--t1);
+  border: 1px solid rgba(255,255,255,.14);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.12) inset,
+    0 2px 8px rgba(0,0,0,.25);
 }
 
-/* ============================================================
+.preview-stage { position: relative; }
+.preview-glow {
+  position: absolute;
+  inset: -60px -80px;
+  background: radial-gradient(ellipse at 50% 50%, rgba(200,153,74,.08) 0%, transparent 60%);
+  pointer-events: none;
+  filter: blur(10px);
+}
+
+.thumb-strip {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 2px;
+}
+.thumb-strip::-webkit-scrollbar { display: none; }
+.thumb {
+  flex: 0 0 auto;
+  width: 138px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1.5px solid rgba(255,255,255,.07);
+  cursor: pointer;
+  transition: all .18s var(--ease);
+  opacity: .38;
+  background: rgba(255,255,255,.03);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.thumb:hover { opacity: .62; border-color: rgba(255,255,255,.12); }
+.thumb.active {
+  border-color: var(--gold);
+  opacity: 1;
+  box-shadow:
+    0 0 0 1px rgba(200,153,74,.25),
+    0 4px 16px rgba(0,0,0,.3);
+}
+.thumb img { width: 100%; display: block; }
+.thumb-lbl {
+  padding: 6px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--t3);
+  text-align: center;
+  background: rgba(255,255,255,.03);
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+.thumb.active .thumb-lbl { color: var(--gold); }
+
+/* ─────────────────────────────────────────────────────────────
+   SPLIT DEEP DIVES
+───────────────────────────────────────────────────────────── */
+.deep-dives {
+  padding: 0 var(--gap) 100px;
+  max-width: var(--max);
+  margin: 0 auto;
+}
+.dive {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: center;
+  padding: 80px 0;
+  border-top: 1px solid rgba(255,255,255,.07);
+}
+.dive:last-child { border-bottom: 1px solid rgba(255,255,255,.07); }
+.dive.flip { direction: rtl; }
+.dive.flip > * { direction: ltr; }
+
+.dive-points {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.dp {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  font-size: 13.5px;
+  color: var(--t2);
+  line-height: 1.5;
+}
+.dp-icon {
+  width: 18px; height: 18px;
+  border-radius: 5px;
+  background: rgba(200,153,74,.1);
+  border: 1px solid rgba(200,153,74,.18);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.dp-icon svg { width: 10px; height: 10px; color: var(--gold); }
+
+/* ─────────────────────────────────────────────────────────────
+   PILLARS
+───────────────────────────────────────────────────────────── */
+.pillars {
+  padding: 0 var(--gap) 100px;
+  max-width: var(--max);
+  margin: 0 auto;
+}
+.pillars-head { text-align: center; margin-bottom: 48px; }
+.pillars-head .body-lg { margin: 0 auto; }
+.pillar-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.pillar {
+  padding: 32px 26px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,.09);
+  background: rgba(255,255,255,.04);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.08) inset,
+    0 6px 24px rgba(0,0,0,.22);
+  transition: all .22s var(--ease);
+}
+.pillar:hover {
+  border-color: rgba(200,153,74,.2);
+  background: rgba(255,255,255,.06);
+  transform: translateY(-2px);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.1) inset,
+    0 12px 36px rgba(0,0,0,.3),
+    0 0 40px rgba(200,153,74,.05);
+}
+.pillar-icon {
+  width: 40px; height: 40px;
+  border-radius: 12px;
+  background: rgba(200,153,74,.1);
+  border: 1px solid rgba(200,153,74,.18);
+  display: grid;
+  place-items: center;
+  margin-bottom: 20px;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.08) inset,
+    0 2px 8px rgba(0,0,0,.15);
+}
+.pillar-icon svg { width: 20px; height: 20px; color: var(--gold); }
+.pillar-title {
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--t1);
+  margin-bottom: 8px;
+  letter-spacing: -.2px;
+}
+.pillar-desc { font-size: 13.5px; color: var(--t2); line-height: 1.65; }
+
+/* ─────────────────────────────────────────────────────────────
+   CTA
+───────────────────────────────────────────────────────────── */
+.cta-wrap {
+  padding: 0 var(--gap) 100px;
+  max-width: var(--max);
+  margin: 0 auto;
+}
+.cta-box {
+  border-radius: 24px;
+  padding: clamp(56px,8vw,88px) clamp(32px,6vw,72px);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.11);
+  background: rgba(255,255,255,.05);
+  backdrop-filter: blur(32px) saturate(160%);
+  -webkit-backdrop-filter: blur(32px) saturate(160%);
+  box-shadow:
+    0 1px 0 var(--spec-top) inset,
+    0 -1px 0 rgba(0,0,0,.1) inset,
+    0 24px 80px rgba(0,0,0,.45),
+    0 0 80px rgba(200,153,74,.06);
+}
+.cta-box::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(200,153,74,.6) 50%,
+    transparent 100%);
+}
+.cta-glow {
+  position: absolute;
+  top: -100px; left: 50%;
+  transform: translateX(-50%);
+  width: 700px; height: 350px;
+  background: radial-gradient(ellipse, rgba(200,153,74,.12) 0%, transparent 65%);
+  pointer-events: none;
+  filter: blur(20px);
+}
+.cta-box h2,
+.cta-box .body-lg,
+.cta-actions,
+.cta-meta { position: relative; z-index: 1; }
+.cta-box .body-lg { margin: 0 auto 36px; }
+.cta-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.cta-meta {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.cta-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  color: var(--t3);
+  font-weight: 500;
+}
+.cta-meta-item svg { width: 13px; height: 13px; color: var(--gold); flex-shrink: 0; }
+
+/* ─────────────────────────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────────────────────────── */
+footer {
+  border-top: 1px solid rgba(255,255,255,.07);
+  position: relative;
+  z-index: 1;
+}
+.foot-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 28px var(--gap);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.foot-logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--t2);
+}
+.foot-logo img { width: 22px; height: 22px; border-radius: 6px; }
+.foot-links {
+  display: flex;
+  gap: 20px;
+  font-size: 13px;
+  color: var(--t3);
+}
+.foot-links a:hover { color: var(--t2); transition: color .15s; }
+.foot-copy { font-size: 12.5px; color: var(--t3); }
+
+/* ─────────────────────────────────────────────────────────────
    RESPONSIVE
-   ============================================================ */
-@media (max-width: 980px) {
-  .bento { grid-template-columns: repeat(2, 1fr); }
-  .span-2 { grid-column: span 2; }
-  .span-4 { grid-column: span 2; }
-  .row-2 { grid-row: auto; }
-  .pillars { grid-template-columns: 1fr; }
-  .dl-specs { grid-template-columns: repeat(2, 1fr); }
-  .foot-cols { grid-template-columns: 1fr 1fr; }
-  .streak-band-inner { grid-template-columns: 1fr; gap: 24px; }
-  .streak-heatmap { max-width: 100%; }
-  .checkin-grid { grid-template-columns: 1fr; }
-  .card-goals .goals-rings { grid-template-columns: 1fr; }
-  .ring-legend { flex-direction: row; flex-wrap: wrap; }
-  .ring-legend li { flex: 1 1 calc(50% - 6px); }
-  .card-log .log-grid { grid-template-columns: 1fr; }
-  .log-entries { grid-template-columns: 1fr; }
+───────────────────────────────────────────────────────────── */
+@media (max-width: 860px) {
+  .feat-head { grid-template-columns: 1fr; gap: 16px; }
+  .feat-grid { grid-template-columns: repeat(2, 1fr); }
+  .dive { grid-template-columns: 1fr; gap: 36px; }
+  .dive.flip { direction: ltr; }
+  .pillar-row { grid-template-columns: 1fr 1fr; }
+  .stats-inner { grid-template-columns: 1fr 1fr; }
+  .nav-links { display: none; }
+}
+@media (max-width: 560px) {
+  .feat-grid { grid-template-columns: 1fr; }
+  .pillar-row { grid-template-columns: 1fr; }
+  .stats-inner { grid-template-columns: 1fr 1fr; border-radius: 16px; }
+  .hero { padding-top: 108px; }
+  h1 { letter-spacing: -1.6px; }
+  .seg { padding: 5px 10px; font-size: 12px; }
 }
 
-@media (max-width: 640px) {
-  .nav-links { display: none; }
-  .nav { grid-template-columns: 1fr auto; }
-  .bento { grid-template-columns: 1fr; }
-  .span-2 { grid-column: auto; }
-  .span-4 { grid-column: auto; }
-  .dl-specs { grid-template-columns: 1fr 1fr; }
-  .dl-card { padding: 48px 24px; }
-  .foot-top { flex-direction: column; gap: 16px; align-items: flex-start; }
-  .foot-bottom { flex-direction: column; gap: 8px; }
-  .day-rail::before { left: 64px; }
-  .day-rail li { grid-template-columns: 56px 12px 1fr; }
+/* ── FAQ ────────────────────────────────────────────────────── */
+.faq-section {
+  padding: 0 var(--gap) 100px;
+  max-width: var(--max);
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.faq-inner {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 72px;
+  align-items: start;
+}
+.faq-head .body-lg { max-width: 280px; }
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.faq-item {
+  border-top: 1px solid rgba(255,255,255,.07);
+}
+.faq-item:last-child { border-bottom: 1px solid rgba(255,255,255,.07); }
+.faq-q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--display);
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--t1);
+  text-align: left;
+  letter-spacing: -.2px;
+  transition: color .15s;
+}
+.faq-q:hover { color: var(--gold-l); }
+.faq-q[aria-expanded="true"] { color: var(--gold-l); }
+.faq-arrow {
+  flex-shrink: 0;
+  color: var(--t3);
+  transition: transform .22s var(--ease);
+}
+.faq-q[aria-expanded="true"] .faq-arrow {
+  transform: rotate(180deg);
+  color: var(--gold);
+}
+.faq-a {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height .3s var(--ease);
+}
+.faq-a:not([hidden]) {
+  max-height: 300px;
+}
+.faq-a[hidden] { display: block !important; max-height: 0; }
+.faq-a p {
+  padding-bottom: 20px;
+  font-size: 14.5px;
+  color: var(--t2);
+  line-height: 1.7;
+}
+.faq-a strong { color: var(--t1); font-weight: 600; }
+@media (max-width: 720px) {
+  .faq-inner { grid-template-columns: 1fr; gap: 36px; }
+  .faq-head .body-lg { max-width: 100%; }
 }
 
 </style>
 </head>
 <body>
 
-<!-- ============== AMBIENT BACKDROP ============== -->
-<div class="backdrop" aria-hidden="true">
-  <div class="grain"></div>
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
+<!-- ── Structured Data ──────────────────────────────────────── -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Mind Anchor",
+      "applicationCategory": "ProductivityApplication",
+      "applicationSubCategory": "Goal Tracking, Habit Tracker, Personal Finance, Task Manager",
+      "operatingSystem": "macOS 13 or later",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "Mind Anchor is an all-in-one macOS productivity app for goal tracking, habit building, personal finance management, task planning, deadline tracking, and daily journaling. Built for ambitious professionals and self-improvers.",
+      "featureList": [
+        "Goal Tracking with milestones and visual progress",
+        "Daily Check-ins and habit streak tracking",
+        "Personal Finance Dashboard with cash flow charts",
+        "Task Board and Calendar planning",
+        "Achievement timeline",
+        "Deadline Tracker with urgency indicators",
+        "Daily Journal linked to goals",
+        "100% local — no cloud, no subscription"
+      ],
+      "screenshot": [
+        "https://mindanchor.app/screens/screen-dashboard.png",
+        "https://mindanchor.app/screens/screen-goals.png",
+        "https://mindanchor.app/screens/screen-finance.png",
+        "https://mindanchor.app/screens/screen-journal.png"
+      ],
+      "softwareVersion": "1.0",
+      "downloadUrl": "https://mindanchor.app/Foreway.dmg",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "ratingCount": "128",
+        "bestRating": "5"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Mind Anchor",
+        "url": "https://mindanchor.app",
+        "logo": "https://mindanchor.app/logo.png"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is Mind Anchor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Mind Anchor is a free all-in-one productivity app for macOS that combines goal tracking, habit building, personal finance management, task planning, deadline tracking, and daily journaling into one calm, focused workspace."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Mind Anchor free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Mind Anchor is completely free to download and use. There are no subscriptions, no in-app purchases, and no hidden fees."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Mind Anchor store my data in the cloud?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Mind Anchor is 100% local. All your goals, habits, finances, and journal entries stay on your Mac. Nothing is ever sent to a server."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What macOS version does Mind Anchor require?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Mind Anchor requires macOS 13 Ventura or later and runs natively on both Apple Silicon (M1/M2/M3/M4) and Intel Macs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is Mind Anchor different from other productivity apps?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Unlike other productivity tools that focus on one area, Mind Anchor combines goals, habits, personal finance, tasks, and journaling in one unified workspace. It replaces five separate apps with one calm, native macOS experience — with no subscription required."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I track my personal finances in Mind Anchor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The Finance Dashboard lets you track income, expenses, investments, savings accounts, bills, and view a 6-month cash flow chart — all locally on your Mac."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Mind Anchor have habit tracking?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The Daily Check-in module lets you set daily habits, track streaks, reflect on your progress, and build consistency over time with a visual streak calendar."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "url": "https://mindanchor.app",
+      "name": "Mind Anchor",
+      "description": "All-in-one macOS productivity app for goals, habits, and finance.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://mindanchor.app/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mindanchor.app/" },
+        { "@type": "ListItem", "position": 2, "name": "Download", "item": "https://mindanchor.app/#download" }
+      ]
+    }
+  ]
+}
+</script>
+
+<!-- Scene backdrop -->
+<div class="scene">
+  <div class="scene-orb orb-1"></div>
+  <div class="scene-orb orb-2"></div>
+  <div class="scene-orb orb-3"></div>
+  <div class="scene-gradient"></div>
+  <div class="scene-noise"></div>
 </div>
 
-<!-- ============== NAV ============== -->
-<header class="nav">
-  <a class="brand" href="#top">
-    <span class="brand-mark" aria-hidden="true">
-      <svg viewBox="0 0 28 28" width="22" height="22">
-        <defs>
-          <linearGradient id="markGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#FFB48A"/>
-            <stop offset="100%" stop-color="#FF6B4A"/>
-          </linearGradient>
-        </defs>
-        <circle cx="14" cy="14" r="11" fill="none" stroke="url(#markGrad)" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="52 12" transform="rotate(-90 14 14)"/>
-        <circle cx="14" cy="14" r="3.2" fill="url(#markGrad)"/>
-      </svg>
-    </span>
-    <span class="brand-word">Foreway</span>
-  </a>
-
-  <nav class="nav-links" aria-label="Primary">
-    <a href="#features">Features</a>
-    <a href="#philosophy">Philosophy</a>
-    <a href="#download">Download</a>
-  </nav>
-
-  <a href="Foreway.dmg" download class="nav-cta">
-    <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M16.365 1.43c0 1.14-.467 2.27-1.225 3.08-.81.87-2.13 1.55-3.21 1.47-.13-1.12.42-2.27 1.16-3.05.84-.88 2.25-1.54 3.27-1.5zm3.86 17.52c-.71 1.04-1.45 2.07-2.62 2.09-1.14.02-1.51-.68-2.82-.68-1.32 0-1.73.66-2.81.7-1.13.04-1.99-1.12-2.71-2.16-1.48-2.14-2.6-6.05-1.09-8.7.75-1.31 2.09-2.14 3.55-2.16 1.11-.02 2.16.75 2.83.75.68 0 1.96-.93 3.31-.79.56.02 2.13.23 3.14 1.7-.08.05-1.88 1.1-1.86 3.28.02 2.6 2.28 3.46 2.31 3.48-.03.07-.36 1.25-1.17 2.46z"/></svg>
-    <span>Download for Mac</span>
-  </a>
-</header>
-
-<main id="top">
-
-<!-- ============== HERO ============== -->
-<section class="hero">
-  <div class="hero-eyebrow">
-    <span class="dot"></span>
-    Native for macOS · Built with SwiftUI
-  </div>
-
-  <h1 class="hero-title">
-    Your goals,<br />
-    <em>your way.</em>
-  </h1>
-
-  <p class="hero-sub">
-    Foreway is a quiet, beautiful productivity hub for your Mac — goals, tasks, deadlines, habits and finances, all in one place. Offline‑first. Yours, forever.
-  </p>
-
-  <div class="hero-ctas">
-    <a href="Foreway.dmg" download class="btn btn-primary">
-      <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M16.365 1.43c0 1.14-.467 2.27-1.225 3.08-.81.87-2.13 1.55-3.21 1.47-.13-1.12.42-2.27 1.16-3.05.84-.88 2.25-1.54 3.27-1.5zm3.86 17.52c-.71 1.04-1.45 2.07-2.62 2.09-1.14.02-1.51-.68-2.82-.68-1.32 0-1.73.66-2.81.7-1.13.04-1.99-1.12-2.71-2.16-1.48-2.14-2.6-6.05-1.09-8.7.75-1.31 2.09-2.14 3.55-2.16 1.11-.02 2.16.75 2.83.75.68 0 1.96-.93 3.31-.79.56.02 2.13.23 3.14 1.7-.08.05-1.88 1.1-1.86 3.28.02 2.6 2.28 3.46 2.31 3.48-.03.07-.36 1.25-1.17 2.46z"/></svg>
-      Download for Mac
-      <span class="btn-meta">v1.0 · macOS 13+</span>
+<!-- ── NAV ─────────────────────────────────────────────────── -->
+<nav id="nav" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <img src="logo.png" alt="Mind Anchor" />
+      Mind Anchor
     </a>
-    <a href="#features" class="btn btn-ghost">
-      See what's inside
-      <svg viewBox="0 0 24 24" width="14" height="14"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 5l7 7-7 7"/></svg>
-    </a>
-  </div>
-
-  <!-- Hero visual: abstract concentric path -->
-  <div class="hero-visual" aria-hidden="true">
-    <svg viewBox="0 0 1200 540" preserveAspectRatio="xMidYMid meet">
-      <defs>
-        <linearGradient id="trackGrad" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stop-color="rgba(255,255,255,0.0)"/>
-          <stop offset="50%" stop-color="rgba(255,255,255,0.12)"/>
-          <stop offset="100%" stop-color="rgba(255,255,255,0.0)"/>
-        </linearGradient>
-        <linearGradient id="pathCoral" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stop-color="#FF9468" stop-opacity="0"/>
-          <stop offset="40%" stop-color="#FF9468"/>
-          <stop offset="100%" stop-color="#FF6B4A"/>
-        </linearGradient>
-        <linearGradient id="pathSky" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stop-color="#7DD3FC" stop-opacity="0"/>
-          <stop offset="60%" stop-color="#7DD3FC"/>
-        </linearGradient>
-        <linearGradient id="pathMint" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stop-color="#86EFAC" stop-opacity="0"/>
-          <stop offset="50%" stop-color="#86EFAC"/>
-        </linearGradient>
-        <linearGradient id="pathViolet" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stop-color="#C4B5FD" stop-opacity="0"/>
-          <stop offset="50%" stop-color="#C4B5FD"/>
-        </linearGradient>
-        <radialGradient id="heroGlow" cx="0.78" cy="0.5" r="0.5">
-          <stop offset="0%" stop-color="rgba(255, 148, 104, 0.32)"/>
-          <stop offset="100%" stop-color="rgba(255, 148, 104, 0)"/>
-        </radialGradient>
-      </defs>
-
-      <!-- glow -->
-      <rect width="1200" height="540" fill="url(#heroGlow)"/>
-
-      <!-- light track lines -->
-      <path d="M -50 380 Q 300 380 600 320 T 1250 200" fill="none" stroke="url(#trackGrad)" stroke-width="1"/>
-      <path d="M -50 410 Q 300 410 600 360 T 1250 260" fill="none" stroke="url(#trackGrad)" stroke-width="1"/>
-      <path d="M -50 440 Q 300 440 600 400 T 1250 320" fill="none" stroke="url(#trackGrad)" stroke-width="1"/>
-
-      <!-- the four goal paths -->
-      <g class="hero-paths">
-        <path class="hp hp-1" d="M -20 460 Q 200 460 400 420 T 820 280 T 1240 120" fill="none" stroke="url(#pathCoral)" stroke-width="3" stroke-linecap="round"/>
-        <path class="hp hp-2" d="M -20 480 Q 250 480 480 460 T 900 380 T 1240 280" fill="none" stroke="url(#pathSky)" stroke-width="2.4" stroke-linecap="round"/>
-        <path class="hp hp-3" d="M -20 500 Q 280 500 520 490 T 940 440 T 1240 360" fill="none" stroke="url(#pathMint)" stroke-width="2" stroke-linecap="round"/>
-        <path class="hp hp-4" d="M -20 520 Q 320 520 560 515 T 980 480 T 1240 420" fill="none" stroke="url(#pathViolet)" stroke-width="1.8" stroke-linecap="round"/>
-      </g>
-
-      <!-- waypoint nodes on coral path -->
-      <g class="hero-nodes">
-        <circle cx="220" cy="455" r="3" fill="#FF9468"/>
-        <circle cx="420" cy="418" r="3" fill="#FF9468"/>
-        <circle cx="620" cy="372" r="3" fill="#FF9468"/>
-        <circle cx="820" cy="284" r="4" fill="#FF9468"/>
-        <circle cx="1010" cy="200" r="4" fill="#FF9468"/>
-        <circle cx="1180" cy="138" r="5" fill="#FFB48A" stroke="#FF6B4A" stroke-width="2"/>
-      </g>
-
-      <!-- a little orbit ring near the end -->
-      <g transform="translate(1180 138)">
-        <circle r="22" fill="none" stroke="rgba(255,180,138,0.35)" stroke-width="1" stroke-dasharray="2 3"/>
-      </g>
-
-      <!-- legend chips -->
-      <g class="hero-legend" font-family="Geist, sans-serif" font-size="12" fill="rgba(255,255,255,0.6)">
-        <g transform="translate(60 90)">
-          <rect x="-8" y="-14" width="156" height="26" rx="13" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)"/>
-          <circle cx="4" cy="-1" r="4" fill="#FF9468"/>
-          <text x="18" y="3">Ship the side project</text>
-          <text x="118" y="3" fill="rgba(255,255,255,0.4)" font-size="11">62%</text>
-        </g>
-        <g transform="translate(60 130)">
-          <rect x="-8" y="-14" width="156" height="26" rx="13" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)"/>
-          <circle cx="4" cy="-1" r="4" fill="#7DD3FC"/>
-          <text x="18" y="3">Run a half marathon</text>
-          <text x="118" y="3" fill="rgba(255,255,255,0.4)" font-size="11">38%</text>
-        </g>
-        <g transform="translate(60 170)">
-          <rect x="-8" y="-14" width="156" height="26" rx="13" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)"/>
-          <circle cx="4" cy="-1" r="4" fill="#86EFAC"/>
-          <text x="18" y="3">Read 24 books</text>
-          <text x="118" y="3" fill="rgba(255,255,255,0.4)" font-size="11">21%</text>
-        </g>
-        <g transform="translate(60 210)">
-          <rect x="-8" y="-14" width="156" height="26" rx="13" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)"/>
-          <circle cx="4" cy="-1" r="4" fill="#C4B5FD"/>
-          <text x="18" y="3">Save for a sabbatical</text>
-          <text x="118" y="3" fill="rgba(255,255,255,0.4)" font-size="11">14%</text>
-        </g>
-      </g>
-
-      <!-- finish flag floating callout -->
-      <g transform="translate(1100 70)" font-family="Geist, sans-serif">
-        <rect x="0" y="0" width="120" height="46" rx="10" fill="rgba(255,148,104,0.12)" stroke="rgba(255,148,104,0.3)"/>
-        <text x="12" y="20" font-size="10" fill="rgba(255,180,138,0.8)" letter-spacing="1">FINISH</text>
-        <text x="12" y="36" font-size="13" fill="#FFD2B8" font-weight="600">Dec 31</text>
-      </g>
-    </svg>
-  </div>
-
-  <!-- trust strip -->
-  <ul class="trust-strip">
-    <li><span class="ts-dot"></span>Offline-first</li>
-    <li><span class="ts-dot"></span>Stores everything locally</li>
-    <li><span class="ts-dot"></span>No cloud, no accounts</li>
-    <li><span class="ts-dot"></span>One-time license</li>
-    <li><span class="ts-dot"></span>Built with SwiftUI</li>
-  </ul>
-</section>
-
-<!-- ============== STREAK BANNER ============== -->
-<section class="streak-band" aria-label="Sample streak heatmap">
-  <div class="streak-band-inner">
-    <div class="streak-meta">
-      <div class="streak-flame">
-        <svg viewBox="0 0 24 24" width="22" height="22"><path fill="#FF9468" d="M13.5 0.67s.74 4.46-3.21 7.05c-3.94 2.59-1.93 6.27-1.93 6.27S6 12.5 6.5 9.5s-1-4 0-6.5c0 0 .5 1 1.5 1.5S10 2.5 10 1s1-1.5 3.5-.33zM12 9.5s2 2 2 5-2 4-4 4-3-1.5-3-3.5 1-2.5 1.5-3 1-1.5 1.5-2.5z"/></svg>
-      </div>
-      <div>
-        <div class="streak-label">Current streak</div>
-        <div class="streak-value"><span>47</span> days</div>
-      </div>
-      <div class="streak-divider"></div>
-      <div>
-        <div class="streak-label">Best streak</div>
-        <div class="streak-value muted"><span>112</span> days</div>
-      </div>
-    </div>
-
-    <div class="streak-heatmap" id="heatmap" aria-hidden="true"></div>
-
-    <div class="streak-legend">
-      <span>Less</span>
-      <i class="h h0"></i><i class="h h1"></i><i class="h h2"></i><i class="h h3"></i><i class="h h4"></i>
-      <span>More</span>
-    </div>
-  </div>
-</section>
-
-<!-- ============== FEATURES (BENTO) ============== -->
-<section class="features" id="features">
-  <div class="section-head">
-    <div class="kicker"><span class="dot"></span>Features</div>
-    <h2 class="section-title">
-      One app for the<br /><em>whole</em> of your life.
-    </h2>
-    <p class="section-sub">
-      Eleven tools that used to live in eleven tabs. Designed to feel like one calm surface — not eleven competing notifications.
-    </p>
-  </div>
-
-  <div class="bento">
-
-    <!-- Goals (large) -->
-    <article class="card card-goals span-2 row-2">
-      <div class="card-head">
-        <div class="card-kicker"><span class="kc kc-coral"></span>Goals</div>
-        <h3 class="card-title">Set a goal. Watch it close.</h3>
-        <p class="card-body">Every goal gets a color, milestones, a streak counter and a progress percentage that climbs as you check things off.</p>
-      </div>
-
-      <div class="goals-rings">
-        <!-- three concentric goal rings -->
-        <svg viewBox="0 0 320 320" class="rings">
-          <defs>
-            <linearGradient id="ringCoral" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#FFB48A"/><stop offset="100%" stop-color="#FF6B4A"/>
-            </linearGradient>
-            <linearGradient id="ringSky" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#A5E4FF"/><stop offset="100%" stop-color="#3DB8E8"/>
-            </linearGradient>
-            <linearGradient id="ringMint" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#B6F5C6"/><stop offset="100%" stop-color="#4ADE80"/>
-            </linearGradient>
-          </defs>
-          <!-- tracks -->
-          <circle cx="160" cy="160" r="140" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="14"/>
-          <circle cx="160" cy="160" r="110" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="14"/>
-          <circle cx="160" cy="160" r="80" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="14"/>
-          <!-- fills -->
-          <circle cx="160" cy="160" r="140" fill="none" stroke="url(#ringCoral)" stroke-width="14" stroke-linecap="round"
-                  stroke-dasharray="879.6" stroke-dashoffset="334" transform="rotate(-90 160 160)"/>
-          <circle cx="160" cy="160" r="110" fill="none" stroke="url(#ringSky)" stroke-width="14" stroke-linecap="round"
-                  stroke-dasharray="691.2" stroke-dashoffset="428" transform="rotate(-90 160 160)"/>
-          <circle cx="160" cy="160" r="80" fill="none" stroke="url(#ringMint)" stroke-width="14" stroke-linecap="round"
-                  stroke-dasharray="502.6" stroke-dashoffset="397" transform="rotate(-90 160 160)"/>
-          <!-- center label -->
-          <text x="160" y="155" text-anchor="middle" fill="#F4F4F5" font-family="Geist" font-size="38" font-weight="600">62%</text>
-          <text x="160" y="180" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-family="Geist" font-size="11" letter-spacing="2">AVERAGE</text>
-        </svg>
-
-        <ul class="ring-legend">
-          <li><span class="kc kc-coral"></span><span class="rl-name">Ship side project</span><span class="rl-val">62%</span></li>
-          <li><span class="kc kc-sky"></span><span class="rl-name">Half marathon</span><span class="rl-val">38%</span></li>
-          <li><span class="kc kc-mint"></span><span class="rl-name">Read 24 books</span><span class="rl-val">21%</span></li>
-        </ul>
-      </div>
-    </article>
-
-    <!-- Calendar -->
-    <article class="card card-cal">
-      <div class="card-head">
-        <div class="card-kicker"><span class="kc kc-sky"></span>Calendar</div>
-        <h3 class="card-title">Your month, at a glance.</h3>
-      </div>
-      <div class="mini-cal">
-        <div class="mc-head">
-          <span>October</span>
-          <span class="mc-nav">‹  ›</span>
-        </div>
-        <div class="mc-dows">
-          <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
-        </div>
-        <div class="mc-grid" id="miniCal"></div>
-      </div>
-    </article>
-
-    <!-- Daily check-in / quote -->
-    <article class="card card-checkin span-2">
-      <div class="checkin-grid">
-        <div class="card-head">
-          <div class="card-kicker"><span class="kc kc-amber"></span>Daily Check-in</div>
-          <h3 class="card-title">A two-minute ritual that protects your streaks.</h3>
-          <p class="card-body">A gentle prompt at the end of each day. Log a note against any goal, mark today done, and you're back tomorrow.</p>
-        </div>
-        <div class="checkin-card">
-          <div class="cc-meta">Wednesday, Oct 23</div>
-          <div class="cc-quote">
-            <span class="quote-mark">&ldquo;</span>
-            <em>What you do every day matters more than what you do once in a while.</em>
-            <div class="cc-quote-by">— Gretchen Rubin</div>
-          </div>
-          <div class="cc-steps">
-            <div class="cc-step done"><span class="check"></span>Logged 30 min of writing</div>
-            <div class="cc-step done"><span class="check"></span>Ran 4.2 km</div>
-            <div class="cc-step"><span class="check empty"></span>Read before bed</div>
-          </div>
-          <button class="cc-cta">Complete check-in &rarr;</button>
-        </div>
-      </div>
-    </article>
-
-    <!-- Expense tracker w PIN -->
-    <article class="card card-expense">
-      <div class="card-head">
-        <div class="card-kicker"><span class="kc kc-mint"></span>Expense Tracker</div>
-        <h3 class="card-title">Money, behind a PIN.</h3>
-        <p class="card-body">Expenses, income, subscriptions and monthly breakdowns — locked away from prying glances.</p>
-      </div>
-      <div class="expense-vis">
-        <div class="bars">
-          <div class="bar" style="--h:38%"><i></i></div>
-          <div class="bar" style="--h:62%"><i></i></div>
-          <div class="bar" style="--h:48%"><i></i></div>
-          <div class="bar" style="--h:74%"><i></i></div>
-          <div class="bar" style="--h:55%"><i></i></div>
-          <div class="bar tall" style="--h:88%"><i></i></div>
-          <div class="bar" style="--h:42%"><i></i></div>
-        </div>
-        <div class="pin-lock">
-          <div class="pin-dots"><i></i><i></i><i></i><i></i></div>
-          <div class="pin-label">Locked</div>
-        </div>
-      </div>
-    </article>
-
-    <!-- Deadlines -->
-    <article class="card card-deadlines">
-      <div class="card-head">
-        <div class="card-kicker"><span class="kc kc-coral"></span>Deadlines</div>
-        <h3 class="card-title">Nothing slips.</h3>
-      </div>
-      <ul class="deadlines">
-        <li><span class="d-day">Fri</span><span class="d-date">25</span><span class="d-text">Submit beta to TestFlight</span><span class="d-dot kc-coral"></span></li>
-        <li><span class="d-day">Tue</span><span class="d-date">29</span><span class="d-text">Mortgage pre-approval</span><span class="d-dot kc-violet"></span></li>
-        <li><span class="d-day">Sat</span><span class="d-date">02</span><span class="d-text">Half-marathon, Nov</span><span class="d-dot kc-sky"></span></li>
-        <li class="muted"><span class="d-day">Fri</span><span class="d-date">15</span><span class="d-text">Q4 review draft</span><span class="d-dot kc-mint"></span></li>
-      </ul>
-    </article>
-
-    <!-- Achievements timeline -->
-    <article class="card card-ach span-2">
-      <div class="card-head">
-        <div class="card-kicker"><span class="kc kc-violet"></span>Achievements</div>
-        <h3 class="card-title">A timeline of small wins.</h3>
-      </div>
-      <ol class="ach-timeline">
-        <li>
-          <span class="ach-em">🏃</span>
-          <div>
-            <div class="ach-title">First 10k without walking</div>
-            <div class="ach-meta">Health · Oct 18</div>
-          </div>
-          <span class="ach-tag">+1 streak</span>
-        </li>
-        <li>
-          <span class="ach-em">📚</span>
-          <div>
-            <div class="ach-title">Finished &ldquo;The Mom Test&rdquo;</div>
-            <div class="ach-meta">Learning · Oct 12</div>
-          </div>
-          <span class="ach-tag">Book 14/24</span>
-        </li>
-        <li>
-          <span class="ach-em">🚀</span>
-          <div>
-            <div class="ach-title">Shipped onboarding v2</div>
-            <div class="ach-meta">Work · Oct 04</div>
-          </div>
-          <span class="ach-tag">Milestone</span>
-        </li>
-        <li class="muted">
-          <span class="ach-em">💸</span>
-          <div>
-            <div class="ach-title">Saved $1,200 this month</div>
-            <div class="ach-meta">Money · Sept 30</div>
-          </div>
-          <span class="ach-tag">Goal +8%</span>
-        </li>
-      </ol>
-    </article>
-
-    <!-- Analytics -->
-    <article class="card card-analytics">
-      <div class="card-head">
-        <div class="card-kicker"><span class="kc kc-sky"></span>Progress Analytics</div>
-        <h3 class="card-title">See the shape of your year.</h3>
-      </div>
-      <div class="sparks">
-        <svg viewBox="0 0 240 90" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="sparkFill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="rgba(125,211,252,0.32)"/>
-              <stop offset="100%" stop-color="rgba(125,211,252,0)"/>
-            </linearGradient>
-          </defs>
-          <path d="M0,70 L20,62 L40,66 L60,50 L80,55 L100,38 L120,42 L140,28 L160,32 L180,22 L200,26 L220,14 L240,18 L240,90 L0,90 Z" fill="url(#sparkFill)"/>
-          <path d="M0,70 L20,62 L40,66 L60,50 L80,55 L100,38 L120,42 L140,28 L160,32 L180,22 L200,26 L220,14 L240,18" fill="none" stroke="#7DD3FC" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <div class="sparks-meta">
-          <span>Consistency, 12 weeks</span>
-          <span class="sparks-trend">↑ 24%</span>
-        </div>
-      </div>
-    </article>
-
-    <!-- Daily log -->
-    <article class="card card-log span-4">
-      <div class="log-grid">
-        <div class="card-head">
-          <div class="card-kicker"><span class="kc kc-mint"></span>Daily Log</div>
-          <h3 class="card-title">A diary,<br/>tied to your goals.</h3>
-          <p class="card-body">Free-write whatever's on your mind. Tag it against one or many goals. The log becomes the story behind your progress.</p>
-        </div>
-        <div class="log-entries">
-          <div class="log-entry">
-            <div class="le-date">Oct 23 &mdash; Wed</div>
-            <p class="le-text">Long writing block this morning. Second act finally clicks. Skipped run &mdash; back at it tomorrow.</p>
-            <div class="le-tags">
-              <span class="le-tag"><span class="kc kc-coral"></span>Side project</span>
-              <span class="le-tag"><span class="kc kc-sky"></span>Half marathon</span>
-            </div>
-          </div>
-          <div class="log-entry">
-            <div class="le-date">Oct 22 &mdash; Tue</div>
-            <p class="le-text">5k easy. Legs felt good. Read another chapter at lunch &mdash; book 14 of 24.</p>
-            <div class="le-tags">
-              <span class="le-tag"><span class="kc kc-sky"></span>Half marathon</span>
-              <span class="le-tag"><span class="kc kc-mint"></span>Read 24 books</span>
-            </div>
-          </div>
-          <div class="log-entry">
-            <div class="le-date">Oct 21 &mdash; Mon</div>
-            <p class="le-text">Logged Oct expenses, paid the credit card off. Sat with a quiet coffee and a long checklist.</p>
-            <div class="le-tags">
-              <span class="le-tag"><span class="kc kc-mint"></span>Money</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </article>
-
-  </div>
-</section>
-
-<!-- ============== PHILOSOPHY ============== -->
-<section class="philosophy" id="philosophy">
-  <div class="section-head center">
-    <div class="kicker"><span class="dot"></span>Philosophy</div>
-    <h2 class="section-title">
-      Built like software<br/><em>used to be.</em>
-    </h2>
-    <p class="section-sub">
-      Three principles, on every screen.
-    </p>
-  </div>
-
-  <div class="pillars">
-    <article class="pillar">
-      <div class="pillar-icon">
-        <svg viewBox="0 0 48 48" width="32" height="32" fill="none">
-          <rect x="8" y="10" width="32" height="22" rx="3" stroke="#FF9468" stroke-width="1.8"/>
-          <path d="M8 14 H40" stroke="#FF9468" stroke-width="1.8"/>
-          <circle cx="12" cy="12" r="1.2" fill="#FF9468"/>
-          <circle cx="16" cy="12" r="1.2" fill="#FF9468"/>
-          <path d="M20 38 H28 M16 38 V32 M32 38 V32" stroke="#FF9468" stroke-width="1.8" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <h3>Native, not a tab.</h3>
-      <p>Built with SwiftUI from the first pixel. Launches in a blink, respects your menu bar, plays nicely with Spotlight.</p>
-    </article>
-
-    <article class="pillar">
-      <div class="pillar-icon">
-        <svg viewBox="0 0 48 48" width="32" height="32" fill="none">
-          <rect x="10" y="20" width="28" height="20" rx="3" stroke="#7DD3FC" stroke-width="1.8"/>
-          <path d="M16 20 V14 a8 8 0 0 1 16 0 V20" stroke="#7DD3FC" stroke-width="1.8"/>
-          <circle cx="24" cy="30" r="2.4" fill="#7DD3FC"/>
-          <path d="M24 32 V35" stroke="#7DD3FC" stroke-width="1.8" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <h3>Private by default.</h3>
-      <p>Everything lives in Core Data on your Mac. No cloud, no analytics, no account. Encrypt your expenses behind a PIN.</p>
-    </article>
-
-    <article class="pillar">
-      <div class="pillar-icon">
-        <svg viewBox="0 0 48 48" width="32" height="32" fill="none">
-          <path d="M24 8 L40 16 V28 a16 16 0 0 1 -16 12 a16 16 0 0 1 -16 -12 V16 Z" stroke="#86EFAC" stroke-width="1.8" stroke-linejoin="round"/>
-          <path d="M18 24 L22 28 L30 20" stroke="#86EFAC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-      <h3>Yours, forever.</h3>
-      <p>One-time license. Pay once, own it. Export anything you've made any time. Nothing to renew, nothing to lose.</p>
-    </article>
-  </div>
-</section>
-
-<!-- ============== A DAY IN FOREWAY ============== -->
-<section class="day">
-  <div class="section-head">
-    <div class="kicker"><span class="dot"></span>A day, in Foreway</div>
-    <h2 class="section-title">
-      Quiet in the morning.<br/><em>Closed</em> by night.
-    </h2>
-  </div>
-
-  <ol class="day-rail">
-    <li>
-      <div class="dr-time">07:12</div>
-      <div class="dr-card">
-        <div class="dr-head"><span class="kc kc-coral"></span>Morning</div>
-        <div class="dr-title">Open Foreway. See three goals, one streak at 47, weather for your run.</div>
-      </div>
-    </li>
-    <li>
-      <div class="dr-time">09:30</div>
-      <div class="dr-card">
-        <div class="dr-head"><span class="kc kc-violet"></span>Deep work</div>
-        <div class="dr-title">Pull a task from <em>Today</em>. Drag it to <em>Doing</em>. Foreway gets out of the way.</div>
-      </div>
-    </li>
-    <li>
-      <div class="dr-time">13:04</div>
-      <div class="dr-card">
-        <div class="dr-head"><span class="kc kc-mint"></span>Lunch log</div>
-        <div class="dr-title">Two taps to log lunch against your monthly food budget. PIN closes when you're done.</div>
-      </div>
-    </li>
-    <li>
-      <div class="dr-time">19:48</div>
-      <div class="dr-card">
-        <div class="dr-head"><span class="kc kc-sky"></span>Evening</div>
-        <div class="dr-title">Daily check-in. A line in the log. Tomorrow's calendar already lined up.</div>
-      </div>
-    </li>
-    <li>
-      <div class="dr-time">22:15</div>
-      <div class="dr-card dr-card-finale">
-        <div class="dr-head"><span class="kc kc-coral"></span>Streak +1</div>
-        <div class="dr-title"><em>Day closed.</em> 48 days, and counting.</div>
-      </div>
-    </li>
-  </ol>
-</section>
-
-<!-- ============== DOWNLOAD ============== -->
-<section class="download" id="download">
-  <div class="dl-card">
-    <div class="dl-glow" aria-hidden="true"></div>
-    <div class="dl-inner">
-      <div class="kicker"><span class="dot"></span>Available now</div>
-      <h2 class="section-title">
-        Bring Foreway<br/><em>home.</em>
-      </h2>
-      <p class="section-sub">
-        A single, calm Mac app. One-time license. Free updates through 1.x.
-      </p>
-
-      <a href="Foreway.dmg" download class="btn btn-primary btn-xl">
-        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M16.365 1.43c0 1.14-.467 2.27-1.225 3.08-.81.87-2.13 1.55-3.21 1.47-.13-1.12.42-2.27 1.16-3.05.84-.88 2.25-1.54 3.27-1.5zm3.86 17.52c-.71 1.04-1.45 2.07-2.62 2.09-1.14.02-1.51-.68-2.82-.68-1.32 0-1.73.66-2.81.7-1.13.04-1.99-1.12-2.71-2.16-1.48-2.14-2.6-6.05-1.09-8.7.75-1.31 2.09-2.14 3.55-2.16 1.11-.02 2.16.75 2.83.75.68 0 1.96-.93 3.31-.79.56.02 2.13.23 3.14 1.7-.08.05-1.88 1.1-1.86 3.28.02 2.6 2.28 3.46 2.31 3.48-.03.07-.36 1.25-1.17 2.46z"/></svg>
-        Download Foreway 1.0
-        <span class="btn-meta">macOS 13 Ventura or later · Apple Silicon &amp; Intel · 38 MB</span>
-      </a>
-
-      <ul class="dl-specs">
-        <li>
-          <div class="ds-label">License</div>
-          <div class="ds-val">Single-user, one-time</div>
-        </li>
-        <li>
-          <div class="ds-label">Updates</div>
-          <div class="ds-val">Free through 1.x</div>
-        </li>
-        <li>
-          <div class="ds-label">Sync</div>
-          <div class="ds-val">Local-only, by design</div>
-        </li>
-        <li>
-          <div class="ds-label">Source</div>
-          <div class="ds-val">SwiftUI · Core Data</div>
-        </li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ============== FOOTER ============== -->
-<footer class="footer">
-  <div class="foot-top">
-    <a class="brand brand-foot" href="#top">
-      <span class="brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 28 28" width="20" height="20">
-          <circle cx="14" cy="14" r="11" fill="none" stroke="url(#markGrad)" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="52 12" transform="rotate(-90 14 14)"/>
-          <circle cx="14" cy="14" r="3.2" fill="url(#markGrad)"/>
-        </svg>
-      </span>
-      <span class="brand-word">Foreway</span>
-    </a>
-    <p class="foot-tag"><em>Your goals, your way.</em></p>
-  </div>
-
-  <div class="foot-cols">
-    <div>
-      <div class="fc-label">Product</div>
+    <div class="nav-links">
       <a href="#features">Features</a>
-      <a href="#philosophy">Philosophy</a>
-      <a href="#download">Download</a>
-      <a href="#">Release notes</a>
+      <a href="#preview">Preview</a>
+      <a href="#why">Why</a>
+    </div>
+    <div class="nav-end">
+      <a href="Foreway.dmg" download="MindAnchor.dmg" class="btn btn-primary">Download</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── MAIN ─────────────────────────────────────────────────── -->
+<main id="main-content">
+
+<!-- ── HERO ─────────────────────────────────────────────────── -->
+<section aria-labelledby="hero-heading">
+<div class="hero">
+  <div class="hero-chip">
+    <span class="chip-dot"></span>
+    Now available for macOS
+  </div>
+  <h1 id="hero-heading">Stay grounded.<br/><span class="h1-gold">Move forward.</span></h1>
+  <p class="hero-sub">The all-in-one <strong>productivity app for Mac</strong> that unifies goal tracking, habit building, and personal finance. One calm workspace — built for people who take personal growth seriously.</p>
+  <div class="hero-actions">
+    <a href="Foreway.dmg" download="MindAnchor.dmg" class="btn btn-primary btn-xl">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13M5 16l7 5 7-5"/></svg>
+      Download for Mac
+    </a>
+    <a href="#preview" class="btn btn-glass btn-xl">See it in action</a>
+  </div>
+  <p class="hero-hint">Free &nbsp;·&nbsp; macOS 13+ &nbsp;·&nbsp; Apple Silicon native</p>
+
+  <div class="hero-shot">
+    <div class="hero-shot-glow"></div>
+    <div class="win">
+      <div class="win-bar">
+        <div class="tl tl-r"></div>
+        <div class="tl tl-y"></div>
+        <div class="tl tl-g"></div>
+        <div class="win-title">Mind Anchor — Dashboard</div>
+      </div>
+      <img src="screens/screen-dashboard.png" alt="Mind Anchor macOS productivity app dashboard showing active goals, habit streaks, and daily stats" width="1200" height="750" />
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ── STATS ────────────────────────────────────────────────── -->
+<div class="stats">
+  <div class="stats-inner">
+    <div class="stat">
+      <div class="stat-n"><span class="g">6</span></div>
+      <div class="stat-lbl">Modules in one app</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">100<span class="g">%</span></div>
+      <div class="stat-lbl">Local &amp; private</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n"><span class="g">∞</span></div>
+      <div class="stat-lbl">Goals, no limits</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n"><span class="g">0</span></div>
+      <div class="stat-lbl">Subscriptions needed</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FEATURES ─────────────────────────────────────────────── -->
+<section class="features" id="features" aria-labelledby="features-heading">
+  <div class="feat-head">
+    <div>
+      <div class="eyebrow">Features</div>
+      <h2 id="features-heading">Six modules.<br/>One command center.</h2>
     </div>
     <div>
-      <div class="fc-label">Help</div>
-      <a href="#">User guide</a>
-      <a href="#">Keyboard shortcuts</a>
-      <a href="#">Importing data</a>
-      <a href="#">Contact support</a>
-    </div>
-    <div>
-      <div class="fc-label">Company</div>
-      <a href="#">About</a>
-      <a href="#">Privacy</a>
-      <a href="#">License</a>
-      <a href="mailto:hello@foreway.app">hello@foreway.app</a>
+      <p class="body-lg">Replace scattered apps with a single, calm workspace that keeps every dimension of your personal growth in sync.</p>
     </div>
   </div>
 
-  <div class="foot-bottom">
-    <span>© 2026 Foreway</span>
-    <span>Designed and built in Brooklyn.</span>
+  <div class="feat-grid">
+
+    <div class="feat-card">
+      <div class="feat-num">01</div>
+      <div class="feat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>
+      </div>
+      <div class="feat-title">Goal Tracking</div>
+      <p class="feat-desc">Set goals, break them into milestones and steps, and watch progress build visually over time.</p>
+    </div>
+
+    <div class="feat-card">
+      <div class="feat-num">02</div>
+      <div class="feat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12"/><path d="M12 6v6l4 2"/></svg>
+      </div>
+      <div class="feat-title">Daily Check-ins</div>
+      <p class="feat-desc">Build lasting habits with daily reflections and streak tracking that keeps you consistent.</p>
+    </div>
+
+    <div class="feat-card">
+      <div class="feat-num">03</div>
+      <div class="feat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+      </div>
+      <div class="feat-title">Finance Dashboard</div>
+      <p class="feat-desc">Monitor income, expenses, investments, and cash flow. Know exactly where you stand, always.</p>
+    </div>
+
+    <div class="feat-card">
+      <div class="feat-num">04</div>
+      <div class="feat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </div>
+      <div class="feat-title">Task Board &amp; Calendar</div>
+      <p class="feat-desc">Plan your days and weeks visually. See everything at once and act with total clarity.</p>
+    </div>
+
+    <div class="feat-card">
+      <div class="feat-num">05</div>
+      <div class="feat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <div class="feat-title">Achievements</div>
+      <p class="feat-desc">Celebrate every milestone on a personal timeline. Your wins deserve to be remembered.</p>
+    </div>
+
+    <div class="feat-card">
+      <div class="feat-num">06</div>
+      <div class="feat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <div class="feat-title">Deadline Tracker</div>
+      <p class="feat-desc">Never miss an important date. Smart urgency indicators keep every deadline front of mind.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── SCREENSHOT PREVIEW ────────────────────────────────────── -->
+<section class="preview" id="preview">
+  <div class="preview-head">
+    <div class="eyebrow">Preview</div>
+    <h2>Every screen, purpose-built.</h2>
+    <p class="body-lg">Each module feels native, fast, and distraction-free — designed to disappear so you can focus on what matters.</p>
+  </div>
+
+  <div class="seg-ctrl" id="segCtrl">
+    <div class="seg active" data-idx="0">Dashboard</div>
+    <div class="seg" data-idx="1">Goals</div>
+    <div class="seg" data-idx="2">Goal Detail</div>
+    <div class="seg" data-idx="3">Finance</div>
+    <div class="seg" data-idx="4">Journal</div>
+    <div class="seg" data-idx="5">Calendar</div>
+  </div>
+
+  <div class="preview-stage">
+    <div class="preview-glow"></div>
+    <div class="win">
+      <div class="win-bar">
+        <div class="tl tl-r"></div>
+        <div class="tl tl-y"></div>
+        <div class="tl tl-g"></div>
+        <div class="win-title" id="winTitle">Dashboard</div>
+      </div>
+      <img id="mainShot" src="screens/screen-dashboard.png" alt="Dashboard" />
+    </div>
+  </div>
+
+  <div class="thumb-strip" id="thumbStrip">
+    <div class="thumb active" data-idx="0">
+      <img src="screens/screen-dashboard.png" alt="Dashboard"/>
+      <div class="thumb-lbl">Dashboard</div>
+    </div>
+    <div class="thumb" data-idx="1">
+      <img src="screens/screen-goals.png" alt="Goals"/>
+      <div class="thumb-lbl">Goals</div>
+    </div>
+    <div class="thumb" data-idx="2">
+      <img src="screens/screen-goals-detail.png" alt="Goal Detail"/>
+      <div class="thumb-lbl">Goal Detail</div>
+    </div>
+    <div class="thumb" data-idx="3">
+      <img src="screens/screen-finance.png" alt="Finance"/>
+      <div class="thumb-lbl">Finance</div>
+    </div>
+    <div class="thumb" data-idx="4">
+      <img src="screens/screen-journal.png" alt="Journal"/>
+      <div class="thumb-lbl">Journal</div>
+    </div>
+    <div class="thumb" data-idx="5">
+      <img src="screens/screen-calendar.png" alt="Calendar"/>
+      <div class="thumb-lbl">Calendar</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DEEP DIVES ────────────────────────────────────────────── -->
+<section class="deep-dives" id="why">
+
+  <div class="dive">
+    <div>
+      <div class="eyebrow">Goal Tracking</div>
+      <h2>Goals with structure, not just intention.</h2>
+      <p class="body-lg">Break any goal into milestones and steps. Track progress visually, see what's next, stay motivated without the noise.</p>
+      <div class="dive-points">
+        <div class="dp">
+          <div class="dp-icon"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 5l2.5 2.5 4.5-4"/></svg></div>
+          Nested milestones and sub-steps per goal
+        </div>
+        <div class="dp">
+          <div class="dp-icon"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 5l2.5 2.5 4.5-4"/></svg></div>
+          Visual progress ring with percentage
+        </div>
+        <div class="dp">
+          <div class="dp-icon"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 5l2.5 2.5 4.5-4"/></svg></div>
+          Filter by category — Career, Fitness, Learning
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="win">
+        <div class="win-bar">
+          <div class="tl tl-r"></div><div class="tl tl-y"></div><div class="tl tl-g"></div>
+          <div class="win-title">Goals</div>
+        </div>
+        <img src="screens/screen-goals-detail.png" alt="Goal detail" />
+      </div>
+    </div>
+  </div>
+
+  <div class="dive flip">
+    <div>
+      <div class="eyebrow">Finance</div>
+      <h2>Your financial picture, always clear.</h2>
+      <p class="body-lg">Net worth, allocations, commitments, investments, and bills — one dashboard that tells the full story at a glance.</p>
+      <div class="dive-points">
+        <div class="dp">
+          <div class="dp-icon"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 5l2.5 2.5 4.5-4"/></svg></div>
+          6-month income vs expense flow chart
+        </div>
+        <div class="dp">
+          <div class="dp-icon"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 5l2.5 2.5 4.5-4"/></svg></div>
+          Track accounts, savings, and investments
+        </div>
+        <div class="dp">
+          <div class="dp-icon"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 5l2.5 2.5 4.5-4"/></svg></div>
+          Bill tracking and recurring commitments
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="win">
+        <div class="win-bar">
+          <div class="tl tl-r"></div><div class="tl tl-y"></div><div class="tl tl-g"></div>
+          <div class="win-title">Finance</div>
+        </div>
+        <img src="screens/screen-finance.png" alt="Finance overview" />
+      </div>
+    </div>
+  </div>
+
+  <div class="dive">
+    <div>
+      <div class="eyebrow">Journal</div>
+      <h2>Reflect daily.<br/>Build momentum.</h2>
+      <p class="body-lg">A distraction-free journal tied to your goals and streaks. Show up every day and watch compound growth unfold.</p>
+      <div class="dive-points">
+        <div class="dp">
+          <div class="dp-icon"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 5l2.5 2.5 4.5-4"/></svg></div>
+          Entries linked to your active goals
+        </div>
+        <div class="dp">
+          <div class="dp-icon"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 5l2.5 2.5 4.5-4"/></svg></div>
+          Streak tracking with visual calendar
+        </div>
+        <div class="dp">
+          <div class="dp-icon"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 5l2.5 2.5 4.5-4"/></svg></div>
+          Quick daily log — zero friction
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="win">
+        <div class="win-bar">
+          <div class="tl tl-r"></div><div class="tl tl-y"></div><div class="tl tl-g"></div>
+          <div class="win-title">Journal</div>
+        </div>
+        <img src="screens/screen-journal.png" alt="Journal" />
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ── PILLARS ───────────────────────────────────────────────── -->
+<section class="pillars">
+  <div class="pillars-head">
+    <div class="eyebrow">Why Mind Anchor</div>
+    <h2>Different by design.</h2>
+    <p class="body-lg">We didn't build another productivity tool. We built the command center your ambitions deserve.</p>
+  </div>
+  <div class="pillar-row">
+    <div class="pillar">
+      <div class="pillar-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      </div>
+      <div class="pillar-title">All-in-one</div>
+      <p class="pillar-desc">Goals, habits, tasks, finances, deadlines — one app, zero context switching. Your whole life in one place.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-1.2 5.4-5 7.8-7 9 0 5 3.1 8.3 7 9 3.9-.7 7-4 7-9-2-1.2-5.8-3.6-7-9Z"/></svg>
+      </div>
+      <div class="pillar-title">Calm by default</div>
+      <p class="pillar-desc">Every screen is purposeful, quiet, and fast. Designed to reduce cognitive load — not add to it.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <div class="pillar-title">Privacy-first</div>
+      <p class="pillar-desc">100% local. Your data never leaves your device. No cloud sync, no subscriptions, no compromise.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ───────────────────────────────────────────────────── -->
+<section class="faq-section" id="faq" aria-labelledby="faq-heading">
+  <div class="faq-inner">
+    <div class="faq-head">
+      <div class="eyebrow">FAQ</div>
+      <h2 id="faq-heading">Everything you need to know.</h2>
+      <p class="body-lg">Quick answers to the questions we hear most.</p>
+    </div>
+    <div class="faq-list" role="list">
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-1">
+          What is Mind Anchor and what does it do?
+          <svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a" id="faq-a-1" hidden>
+          <p>Mind Anchor is a free all-in-one <strong>productivity app for macOS</strong> that brings goal tracking, daily habit building, personal finance management, task planning, deadline tracking, and journaling into a single, focused workspace. It replaces five or more scattered apps with one calm, native Mac experience.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-2">
+          How is Mind Anchor different from other productivity tools?
+          <svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a" id="faq-a-2" hidden>
+          <p>Most <strong>productivity tools</strong> are single-purpose — one app for goals, another for habits, another for finance. Mind Anchor combines all of them into one seamless workspace, so you never lose context by switching apps. It's also 100% local with no subscription, unlike cloud-based competitors.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-3">
+          Is Mind Anchor free? Are there any subscriptions?
+          <svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a" id="faq-a-3" hidden>
+          <p>Mind Anchor is completely free to download and use — no subscription, no in-app purchases, no paywalls. Every feature is available from day one at no cost.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-4">
+          Does it sync my data to the cloud?
+          <svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a" id="faq-a-4" hidden>
+          <p>Never. Mind Anchor is <strong>100% local</strong>. Your goals, habits, financial data, and journal entries live exclusively on your Mac. No accounts required, no data ever sent to a server.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-5">
+          What Mac and macOS does it support?
+          <svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a" id="faq-a-5" hidden>
+          <p>Mind Anchor runs on <strong>macOS 13 Ventura or later</strong> and is optimised natively for Apple Silicon (M1, M2, M3, M4) as well as Intel Macs.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-6">
+          Can I track personal finance alongside my goals?
+          <svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a" id="faq-a-6" hidden>
+          <p>Yes. The Finance Dashboard tracks income, expenses, savings accounts, investments, bills, and gives you a 6-month cash flow chart — all in one view, all locally on your Mac. No bank integrations required.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ───────────────────────────────────────────────────── -->
+<section class="cta-wrap" id="download">
+  <div class="cta-box">
+    <div class="cta-glow"></div>
+    <div class="eyebrow">Get started</div>
+    <h2>Your command center awaits.</h2>
+    <p class="body-lg">One download. Instant clarity. Built for the version of you that shows up every day.</p>
+    <div class="cta-actions">
+      <a href="Foreway.dmg" download="MindAnchor.dmg" class="btn btn-primary btn-xl">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13M5 16l7 5 7-5"/></svg>
+        Download for Mac — Free
+      </a>
+    </div>
+    <div class="cta-meta">
+      <div class="cta-meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Local-only · no cloud
+      </div>
+      <div class="cta-meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        macOS 13 · Apple Silicon
+      </div>
+      <div class="cta-meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        No subscription required
+      </div>
+    </div>
+  </div>
+</section>
+
+</main><!-- /main -->
+
+<!-- ── FOOTER ────────────────────────────────────────────────── -->
+<footer aria-label="Site footer">
+  <div class="foot-inner">
+    <div class="foot-logo">
+      <img src="logo.png" alt="Mind Anchor" />
+      Mind Anchor
+    </div>
+    <div class="foot-links">
+      <a href="#">Privacy</a>
+      <a href="#">Support</a>
+      <a href="#">Changelog</a>
+    </div>
+    <div class="foot-copy">&copy; 2025 Mind Anchor</div>
   </div>
 </footer>
 
-</main>
-
 <script>
-/* Foreway marketing site - micro-interactions */
+  // Nav vibrancy on scroll
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function() {
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  }, { passive: true });
 
-(function () {
-  // ====== Heatmap generator ======
-  const hm = document.getElementById('heatmap');
-  if (hm) {
-    const weeks = 26; // half-year
-    const cells = weeks * 7;
-    // bias intensity so it looks like progress over time
-    let seed = 7;
-    const rand = () => {
-      seed = (seed * 9301 + 49297) % 233280;
-      return seed / 233280;
-    };
-    let html = '';
-    for (let i = 0; i < cells; i++) {
-      const weekIdx = Math.floor(i / 7);
-      const recencyBoost = (weekIdx / weeks) * 0.4; // newer weeks more active
-      let r = rand() + recencyBoost - 0.15;
-      // create some streak clusters
-      if (weekIdx > 14 && rand() > 0.35) r += 0.3;
-      let level = 0;
-      if (r > 0.2) level = 1;
-      if (r > 0.45) level = 2;
-      if (r > 0.65) level = 3;
-      if (r > 0.85) level = 4;
-      // last few days always active for streak
-      if (i >= cells - 14) level = Math.max(level, 3);
-      if (i >= cells - 4) level = 4;
-      html += `<i data-l="${level}"></i>`;
-    }
-    hm.innerHTML = html;
+  // Screenshot switcher
+  var screens = [
+    { src: 'screens/screen-dashboard.png',    label: 'Dashboard' },
+    { src: 'screens/screen-goals.png',        label: 'Goals' },
+    { src: 'screens/screen-goals-detail.png', label: 'Goal Detail' },
+    { src: 'screens/screen-finance.png',      label: 'Finance' },
+    { src: 'screens/screen-journal.png',      label: 'Journal' },
+    { src: 'screens/screen-calendar.png',     label: 'Calendar' },
+  ];
+  var img    = document.getElementById('mainShot');
+  var title  = document.getElementById('winTitle');
+  var segs   = document.querySelectorAll('#segCtrl .seg');
+  var thumbs = document.querySelectorAll('#thumbStrip .thumb');
+
+  function activate(idx) {
+    img.style.opacity = '0';
+    setTimeout(function() {
+      img.src = screens[idx].src;
+      img.alt = screens[idx].label;
+      title.textContent = screens[idx].label;
+      img.style.opacity = '1';
+    }, 150);
+    segs.forEach(function(s)   { s.classList.toggle('active',  +s.dataset.idx === idx); });
+    thumbs.forEach(function(t) { t.classList.toggle('active',  +t.dataset.idx === idx); });
   }
 
-  // ====== Mini calendar ======
-  const cal = document.getElementById('miniCal');
-  if (cal) {
-    // October 2026 — first day Thursday (5 cells of prev month start)
-    // We'll show 6 rows × 7 cols = 42 cells
-    const today = 23; // highlight
-    const daysInOct = 31;
-    const startOffset = 3; // Mon=0..Thu=3
-    const events = {
-      8: 'sky', 14: 'coral', 17: 'violet', 22: 'mint',
-      23: 'coral', 25: 'coral', 29: 'violet', 30: 'sky'
-    };
-    let html = '';
-    // prev month tail (Sept ends on 30; show 28,29,30)
-    const prevDays = [28, 29, 30];
-    prevDays.forEach(d => {
-      html += `<div class="mc-day mc-prev">${d}</div>`;
+  segs.forEach(function(s)   { s.addEventListener('click', function() { activate(+s.dataset.idx); }); });
+  thumbs.forEach(function(t) { t.addEventListener('click', function() { activate(+t.dataset.idx); }); });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      var panel = document.getElementById(btn.getAttribute('aria-controls'));
+      btn.setAttribute('aria-expanded', !expanded);
+      if (expanded) {
+        panel.setAttribute('hidden', '');
+      } else {
+        panel.removeAttribute('hidden');
+      }
     });
-    for (let d = 1; d <= daysInOct; d++) {
-      const cls = ['mc-day'];
-      if (d === today) cls.push('mc-today');
-      if (events[d]) cls.push('mc-has');
-      const c = events[d] ? `data-c="${events[d]}"` : '';
-      html += `<div class="${cls.join(' ')}" ${c}>${d}</div>`;
-    }
-    // fill out to 42
-    const filled = prevDays.length + daysInOct;
-    for (let d = 1; d <= 42 - filled; d++) {
-      html += `<div class="mc-day mc-next">${d}</div>`;
-    }
-    cal.innerHTML = html;
-  }
-
-  // ====== Reveal on scroll ======
-  const targets = document.querySelectorAll('.card, .pillar, .day-rail li, .dl-card, .streak-band-inner');
-  const reveal = (el) => {
-    el.style.opacity = '1';
-    el.style.transform = 'translateY(0)';
-  };
-  targets.forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(16px)';
-    el.style.transition = 'opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out)';
   });
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const idx = [...entry.target.parentElement.children].indexOf(entry.target);
-          entry.target.style.transitionDelay = `${Math.min(idx * 60, 360)}ms`;
-          reveal(entry.target);
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.04, rootMargin: '0px 0px 80px 0px' });
-    targets.forEach(el => io.observe(el));
-  } else {
-    targets.forEach(reveal);
-  }
-  // Hard fallback: never leave anything invisible
-  setTimeout(() => targets.forEach(reveal), 2500);
-
-  // ====== Cursor-tracked orb on hero ======
-  const hero = document.querySelector('.hero');
-  const orb1 = document.querySelector('.orb-1');
-  if (hero && orb1) {
-    hero.addEventListener('mousemove', (e) => {
-      const r = hero.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width - 0.5;
-      const y = (e.clientY - r.top) / r.height - 0.5;
-      orb1.style.transform = `translate(${x * 40}px, ${y * 40}px)`;
-    });
-  }
-})();
-
 </script>
 </body>
 </html>
