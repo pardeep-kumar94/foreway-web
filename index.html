@@ -1639,5 +1639,45 @@ footer {
     });
   });
 </script>
+
+<!-- ── Firebase Analytics ───────────────────────────────────── -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+  import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-analytics.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAQaCbD51X7_2p_xWsu74bcjo-qbXsuts0",
+    authDomain: "mindachor.firebaseapp.com",
+    projectId: "mindachor",
+    storageBucket: "mindachor.firebasestorage.app",
+    messagingSenderId: "177608891999",
+    appId: "1:177608891999:web:68bfd7aba6cf31859805ea",
+    measurementId: "G-8D57WWEFJB"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+
+  // Track download button clicks
+  document.querySelectorAll('a[download]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      logEvent(analytics, 'file_download', {
+        file_name: 'MindAnchor.dmg',
+        link_text: btn.textContent.trim()
+      });
+    });
+  });
+
+  // Track FAQ opens
+  document.querySelectorAll('.faq-q').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      if (btn.getAttribute('aria-expanded') === 'true') {
+        logEvent(analytics, 'faq_open', {
+          question: btn.textContent.trim().replace(/\s+/g, ' ')
+        });
+      }
+    });
+  });
+</script>
 </body>
 </html>
