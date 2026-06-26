@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <url>
+    <loc>https://mindanchor.site/</loc>
+    <lastmod>2025-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://mindanchor.site/screens/screen-dashboard.png</image:loc>
+      <image:title>Mind Anchor Dashboard — macOS productivity app</image:title>
+      <image:caption>Mind Anchor dashboard showing active goals, habit streaks, and financial stats</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://mindanchor.site/screens/screen-goals.png</image:loc>
+      <image:title>Goal Tracking — Mind Anchor for Mac</image:title>
+      <image:caption>Goal tracking module showing active goals with progress rings and categories</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://mindanchor.site/screens/screen-goals-detail.png</image:loc>
+      <image:title>Goal Detail View — Mind Anchor macOS productivity app</image:title>
+      <image:caption>Detailed goal view with milestones, sub-steps, and check-in frequency</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://mindanchor.site/screens/screen-finance.png</image:loc>
+      <image:title>Personal Finance Dashboard — Mind Anchor</image:title>
+      <image:caption>Finance overview showing net worth, monthly cash flow, and account balances</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://mindanchor.site/screens/screen-journal.png</image:loc>
+      <image:title>Daily Journal — Mind Anchor habit and goal tracker</image:title>
+      <image:caption>Journal module showing daily progress entries linked to goals</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://mindanchor.site/screens/screen-calendar.png</image:loc>
+      <image:title>Calendar and Task Planner — Mind Anchor for Mac</image:title>
+      <image:caption>Calendar view with daily tasks and bill reminders</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://mindanchor.site/logo.png</image:loc>
+      <image:title>Mind Anchor App Icon</image:title>
+      <image:caption>Mind Anchor — productivity app for macOS</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://mindanchor.site/#features</loc>
+    <lastmod>2025-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://mindanchor.site/#preview</loc>
+    <lastmod>2025-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://mindanchor.site/#why</loc>
+    <lastmod>2025-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://mindanchor.site/#faq</loc>
+    <lastmod>2025-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://mindanchor.site/#download</loc>
+    <lastmod>2025-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+</urlset>
