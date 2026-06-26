@@ -1641,19 +1641,14 @@ footer {
 </script>
 
 <!-- ── Firebase Analytics ───────────────────────────────────── -->
+<script src="firebase-config.js"></script>
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
   import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-analytics.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyAQaCbD51X7_2p_xWsu74bcjo-qbXsuts0",
-    authDomain: "mindachor.firebaseapp.com",
-    projectId: "mindachor",
-    storageBucket: "mindachor.firebasestorage.app",
-    messagingSenderId: "177608891999",
-    appId: "1:177608891999:web:68bfd7aba6cf31859805ea",
-    measurementId: "G-8D57WWEFJB"
-  };
+  // Config is injected by firebase-config.js (gitignored — never committed)
+  const firebaseConfig = window.__FIREBASE_CONFIG__;
+  if (!firebaseConfig) { console.warn('Firebase config not found.'); }
 
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
