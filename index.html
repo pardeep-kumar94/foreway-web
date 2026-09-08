@@ -988,6 +988,96 @@ footer {
   .faq-head .body-lg { max-width: 100%; }
 }
 
+/* ── Survey popup (non-dismissable) ───────────────────────── */
+.fw-survey-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(6, 10, 22, 0.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: fwSurveyFade .4s var(--ease);
+  overflow-y: auto;
+}
+@keyframes fwSurveyFade { from { opacity: 0; } to { opacity: 1; } }
+.fw-survey-card {
+  width: 100%;
+  max-width: 480px;
+  background: linear-gradient(180deg, var(--navy-l) 0%, var(--bg-mid) 100%);
+  border: 1px solid var(--glass-thick);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 24px 80px rgba(0,0,0,.6), inset 0 1px 0 var(--spec-top-sm);
+  animation: fwSurveyRise .5s var(--ease);
+}
+@keyframes fwSurveyRise {
+  from { opacity: 0; transform: translateY(18px) scale(.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.fw-survey-eyebrow {
+  font-family: var(--body);
+  font-size: 12px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--gold-l); margin: 0 0 10px;
+}
+.fw-survey-title {
+  font-family: var(--display);
+  font-size: 27px; line-height: 1.15; color: var(--t1); margin: 0 0 8px;
+}
+.fw-survey-sub {
+  font-size: 15px; line-height: 1.5; color: var(--t2); margin: 0 0 24px;
+}
+.fw-survey-field { margin-bottom: 22px; }
+.fw-survey-label {
+  display: block; font-size: 14px; font-weight: 600; color: var(--t1); margin-bottom: 12px;
+}
+.fw-survey-opts { display: grid; gap: 8px; }
+.fw-survey-opt {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--glass-thin);
+  border-radius: 12px;
+  background: var(--glass-ultra);
+  cursor: pointer;
+  transition: border-color .2s var(--ease), background .2s var(--ease);
+  font-size: 15px; color: var(--t2);
+}
+.fw-survey-opt:hover { background: var(--glass-reg); border-color: var(--glass-thick); }
+.fw-survey-opt input { accent-color: var(--gold); width: 16px; height: 16px; flex: none; }
+.fw-survey-opt:has(input:checked) {
+  border-color: var(--gold); background: var(--gold-dim); color: var(--t1);
+}
+.fw-survey-textarea {
+  width: 100%; min-height: 88px; resize: vertical;
+  padding: 12px 14px;
+  border: 1px solid var(--glass-thin);
+  border-radius: 12px;
+  background: var(--glass-ultra);
+  color: var(--t1);
+  font-family: var(--body); font-size: 15px; line-height: 1.5;
+}
+.fw-survey-textarea::placeholder { color: var(--t3); }
+.fw-survey-textarea:focus { outline: none; border-color: var(--gold); background: var(--glass-thin); }
+.fw-survey-btn {
+  width: 100%; border: none; border-radius: 12px;
+  padding: 14px 20px;
+  font-family: var(--body); font-size: 16px; font-weight: 600;
+  color: #1a1206; cursor: pointer;
+  background: linear-gradient(180deg, var(--gold-ll) 0%, var(--gold-l) 45%, var(--gold) 100%);
+  transition: transform .2s var(--ease), opacity .2s var(--ease);
+}
+.fw-survey-btn:hover { transform: translateY(-1px); }
+.fw-survey-btn:disabled { opacity: .6; cursor: default; transform: none; }
+.fw-survey-error {
+  font-size: 13px; color: #F1A9A0; margin-top: 10px; min-height: 16px;
+}
+.fw-survey-thanks { text-align: center; padding: 12px 0; }
+.fw-survey-thanks .fw-survey-title { margin-bottom: 6px; }
+body.fw-survey-lock { overflow: hidden; }
+
 </style>
 </head>
 <body>
@@ -1647,12 +1737,14 @@ footer {
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
   import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-analytics.js";
+  import { getDatabase, ref, push, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-database.js";
 
   // Firebase web API keys are public identifiers — safe to expose.
   // Security is enforced via domain restrictions in Google Cloud Console.
   const firebaseConfig = {
     apiKey: "AIzaSyAQaCbD51X7_2p_xWsu74bcjo-qbXsuts0",
     authDomain: "mindachor.firebaseapp.com",
+    databaseURL: "https://mindachor-default-rtdb.firebaseio.com",
     projectId: "mindachor",
     storageBucket: "mindachor.firebasestorage.app",
     messagingSenderId: "177608891999",
@@ -1662,6 +1754,7 @@ footer {
 
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
+  const db = getDatabase(app);
 
   // Track download button clicks
   document.querySelectorAll('a[download]').forEach(function(btn) {
@@ -1683,6 +1776,100 @@ footer {
       }
     });
   });
+
+  // ── Survey popup (non-dismissable, once per browser) ──────────
+  (function initSurvey() {
+    const DONE_KEY = 'forewaySurveyDone';
+    if (localStorage.getItem(DONE_KEY)) return;
+
+    const PRICES = [
+      "$3.99 / month",
+      "$6.99 / month",
+      "$9.99 / month",
+      "One-time purchase",
+      "I wouldn't pay for it"
+    ];
+
+    const overlay = document.createElement('div');
+    overlay.className = 'fw-survey-overlay';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.setAttribute('aria-labelledby', 'fwSurveyTitle');
+
+    overlay.innerHTML = `
+      <div class="fw-survey-card">
+        <p class="fw-survey-eyebrow">Help shape MindAnchor</p>
+        <h2 class="fw-survey-title" id="fwSurveyTitle">Two quick questions</h2>
+        <p class="fw-survey-sub">Before you explore — tell us what MindAnchor is worth to you and what you'd love it to do.</p>
+        <form id="fwSurveyForm" novalidate>
+          <div class="fw-survey-field">
+            <label class="fw-survey-label">What price feels fair?</label>
+            <div class="fw-survey-opts">
+              ${PRICES.map((p, i) => `
+                <label class="fw-survey-opt">
+                  <input type="radio" name="fwPrice" value="${p}">
+                  <span>${p}</span>
+                </label>`).join('')}
+            </div>
+          </div>
+          <div class="fw-survey-field">
+            <label class="fw-survey-label" for="fwFeature">What extra feature would you want most?</label>
+            <textarea class="fw-survey-textarea" id="fwFeature" name="fwFeature"
+              placeholder="e.g. calendar sync, mobile app, shared boards…"></textarea>
+          </div>
+          <button type="submit" class="fw-survey-btn" id="fwSurveySubmit">Submit &amp; continue</button>
+          <p class="fw-survey-error" id="fwSurveyError" aria-live="polite"></p>
+        </form>
+      </div>`;
+
+    document.body.appendChild(overlay);
+    document.body.classList.add('fw-survey-lock');
+
+    const form = overlay.querySelector('#fwSurveyForm');
+    const errEl = overlay.querySelector('#fwSurveyError');
+    const submitBtn = overlay.querySelector('#fwSurveySubmit');
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      errEl.textContent = '';
+
+      const price = (form.querySelector('input[name="fwPrice"]:checked') || {}).value || '';
+      const feature = form.querySelector('#fwFeature').value.trim();
+
+      if (!price) { errEl.textContent = 'Please pick a price.'; return; }
+      if (!feature) { errEl.textContent = 'Please tell us one feature you\'d want.'; return; }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+
+      try {
+        await push(ref(db, 'surveyResponses'), {
+          price: price,
+          feature: feature,
+          ts: serverTimestamp(),
+          userAgent: navigator.userAgent
+        });
+        logEvent(analytics, 'survey_submitted', { price: price });
+      } catch (err) {
+        console.error('[survey] write failed', err);
+        // Don't trap the user if the DB write fails.
+      }
+
+      localStorage.setItem(DONE_KEY, '1');
+
+      overlay.querySelector('.fw-survey-card').innerHTML = `
+        <div class="fw-survey-thanks">
+          <h2 class="fw-survey-title">Thank you 🙏</h2>
+          <p class="fw-survey-sub">Your answers help us build the right thing.</p>
+          <button type="button" class="fw-survey-btn" id="fwSurveyClose">Continue to site</button>
+        </div>`;
+
+      overlay.querySelector('#fwSurveyClose').addEventListener('click', function () {
+        overlay.remove();
+        document.body.classList.remove('fw-survey-lock');
+      });
+    });
+  })();
 </script>
 </body>
 </html>
